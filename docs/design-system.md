@@ -146,8 +146,8 @@ erDiagram
     GROUP ||--o{ PALETTE_ITEM : usa
     TAG ||--o{ IMAGE_ITEM : usa
     TAG ||--o{ PALETTE_ITEM : usa
-    IMAGE_ITEM ||--|{ COMMENT : contem
-    PALETTE_ITEM ||--|{ COMMENT : contem
+    IMAGE_ITEM ||--|{ COMMENT : contém
+    PALETTE_ITEM ||--|{ COMMENT : contém
 ```
 
 ### 3.2 Abordagem para persistência de dados

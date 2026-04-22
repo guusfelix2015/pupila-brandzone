@@ -1,6 +1,6 @@
 # Pupila Brand Zone
 
-MVP frontend para gerenciamento local de referencias visuais da Pupila Brand Studio.
+MVP frontend para gerenciamento local de referências visuais da Pupila Brand Studio.
 
 ## Stack
 
@@ -24,25 +24,25 @@ O MVP implementa:
 - cadastro e listagem de paletas de cores;
 - grupos;
 - tags;
-- comentarios em imagens e paletas;
-- busca por titulo, comentario e tag;
+- comentários em imagens e paletas;
+- busca por título, comentário e tag;
 - filtros por grupo e tag;
-- persistencia local com `localStorage`;
-- testes unitarios das camadas principais.
+- persistência local com `localStorage`;
+- testes unitários das camadas principais.
 
 Fora do escopo atual:
 
 - backend real;
-- autenticacao;
-- exportacao/importacao;
+- autenticação;
+- exportação/importação;
 - recursos de IA;
-- dashboard de estatisticas;
-- editor avancado de cores;
+- dashboard de estatísticas;
+- editor avançado de cores;
 - IndexedDB.
 
 ## Como executar
 
-Instalar dependencias:
+Instalar dependências:
 
 ```bash
 npm install
@@ -54,7 +54,7 @@ Rodar em desenvolvimento:
 npm run dev
 ```
 
-Gerar build de producao:
+Gerar build de produção:
 
 ```bash
 npm run build
@@ -66,7 +66,7 @@ Executar preview do build:
 npm run preview
 ```
 
-## Validacoes
+## Validações
 
 Formatar:
 
@@ -98,13 +98,13 @@ Coverage:
 npm run test:coverage
 ```
 
-O relatorio HTML fica em:
+O relatório HTML fica em:
 
 ```txt
 coverage/lcov-report/index.html
 ```
 
-O coverage exige pelo menos 70% de branches. A coleta cobre `lib`, stores, hooks/controllers e componentes. Arquivos de entrada/composicao de pagina e views finas ficam fora do calculo porque a regra do projeto concentra comportamento em controllers e componentes testaveis.
+O coverage exige pelo menos 70% de branches. A coleta cobre `lib`, stores, hooks/controllers e componentes. Arquivos de entrada/composição de página e views finas ficam fora do cálculo porque a regra do projeto concentra comportamento em controllers e componentes testáveis.
 
 Gate completo recomendado:
 
@@ -149,7 +149,7 @@ src/
 
 ## Arquitetura
 
-As paginas seguem o padrao Page + Controller + View:
+As páginas seguem o padrão Page + Controller + View:
 
 ```tsx
 export function ImagesPage() {
@@ -164,19 +164,19 @@ Regras aplicadas:
 - `pages/` conecta controller e view;
 - controllers ficam em `features/<module>/hooks`;
 - views ficam em `features/<module>/views`;
-- componentes especificos ficam em `features/<module>/components`;
+- componentes específicos ficam em `features/<module>/components`;
 - estado global fica em Zustand;
 - acesso ao `localStorage` fica isolado em `src/lib/storage`;
 - regras puras ficam em `src/lib`;
-- componentes filhos recebem apenas dados e callbacks necessarios.
+- componentes filhos recebem apenas dados e callbacks necessários.
 
-## Decisoes tecnicas
+## Decisões técnicas
 
 - Vite foi usado por ser suficiente para uma SPA com dados locais.
 - Zustand centraliza estado global e simplifica actions do MVP.
-- React Hook Form + Zod separam formulario e validacao.
-- Busca e filtros rodam em memoria por ser um MVP local.
-- `localStorage` foi escolhido por simplicidade e por nao haver backend.
+- React Hook Form + Zod separam formulário e validação.
+- Busca e filtros rodam em memória por ser um MVP local.
+- `localStorage` foi escolhido por simplicidade e por não haver backend.
 - Testes foram separados por camada: `lib`, store, hooks/controllers e componentes.
 
 ## Testes cobertos
@@ -185,27 +185,27 @@ Regras aplicadas:
 - helpers de cores;
 - busca;
 - filtros;
-- persistencia local;
+- persistência local;
 - actions da store;
 - controllers de grupos, tags, imagens e paletas;
 - formularios;
 - listas/grids;
 - toolbar de busca e filtros.
 
-## Limitacoes conhecidas
+## Limitações conhecidas
 
 - Dados ficam apenas no navegador atual.
-- Imagens sao referenciadas por URL; arquivos binarios nao sao armazenados.
-- Sem sincronizacao entre dispositivos.
-- Sem autenticacao.
+- Imagens são referenciadas por URL; arquivos binários não são armazenados.
+- Sem sincronização entre dispositivos.
+- Sem autenticação.
 - Sem backend real.
-- Testes end-to-end nao foram implementados.
+- Testes end-to-end não foram implementados.
 
-## Possiveis melhorias
+## Possíveis melhorias
 
-- Exportacao e importacao de dados para backup e portabilidade.
-- Backend real com sincronizacao entre dispositivos.
-- Autenticacao e isolamento de acervo por usuario.
-- Visualizacoes avancadas para paletas e referencias.
-- Editor avancado de cores com ajustes e variacoes.
+- Exportação e importação de dados para backup e portabilidade.
+- Backend real com sincronização entre dispositivos.
+- Autenticação e isolamento de acervo por usuário.
+- Visualizações avançadas para paletas e referências.
+- Editor avançado de cores com ajustes e variações.
 - Testes end-to-end para cobrir jornadas completas da interface.
