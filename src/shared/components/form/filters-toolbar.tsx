@@ -28,7 +28,7 @@ export function FiltersToolbar({
     <div className="grid gap-3 rounded-lg border bg-card/95 p-4 shadow-sm md:grid-cols-[1fr_220px_220px_auto]">
       <Input
         aria-label="Pesquisar"
-        placeholder="Pesquisar por nome, comentario ou tag"
+        placeholder="Pesquisar por nome, comentário ou tag"
         value={filters.query}
         onChange={(event) => onQueryChange(event.target.value)}
       />

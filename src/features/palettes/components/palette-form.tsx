@@ -45,7 +45,7 @@ export function PaletteForm({ groups, tags, defaultValues, submitLabel, onSubmit
 
   return (
     <form className="grid gap-4" onSubmit={handleSubmit(handleValidSubmit)}>
-      <FormField label="Titulo" htmlFor="palette-title" error={errors.title?.message}>
+      <FormField label="Título" htmlFor="palette-title" error={errors.title?.message}>
         <Input id="palette-title" placeholder="Ex: Paleta institucional" {...register("title")} />
       </FormField>
       <FormField label="Cores HEX" htmlFor="palette-colors" error={errors.colorsText?.message}>

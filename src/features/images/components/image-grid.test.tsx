@@ -7,11 +7,11 @@ const groups: Group[] = [{ id: "group-1", name: "Branding" }];
 const tags: Tag[] = [{ id: "tag-1", name: "Minimalista" }];
 const image: ImageItem = {
   id: "image-1",
-  title: "Referencia institucional",
+  title: "Referência institucional",
   imageUrl: "https://example.com/image.png",
   groupIds: ["group-1"],
   tagIds: ["tag-1"],
-  comments: [{ id: "comment-1", content: "Comentario", createdAt: "2026-01-01T00:00:00.000Z" }],
+  comments: [{ id: "comment-1", content: "Comentário", createdAt: "2026-01-01T00:00:00.000Z" }],
   createdAt: "2026-01-01T00:00:00.000Z",
   updatedAt: "2026-01-01T00:00:00.000Z",
 };
@@ -67,15 +67,15 @@ describe("ImageGrid", () => {
       />,
     );
 
-    expect(screen.getByRole("img", { name: "Referencia institucional" })).toHaveAttribute(
+    expect(screen.getByRole("img", { name: "Referência institucional" })).toHaveAttribute(
       "src",
       "https://example.com/image.png",
     );
     expect(screen.getByText("Grupo: Branding")).toBeInTheDocument();
     expect(screen.getByText("Tag: Minimalista")).toBeInTheDocument();
-    expect(screen.getByText("1 comentario")).toBeInTheDocument();
+    expect(screen.getByText("1 comentário")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: "Comentarios" }));
+    await user.click(screen.getByRole("button", { name: "Comentários" }));
     await user.click(screen.getByRole("button", { name: "Editar imagem" }));
     await user.click(screen.getByRole("button", { name: "Excluir imagem" }));
 

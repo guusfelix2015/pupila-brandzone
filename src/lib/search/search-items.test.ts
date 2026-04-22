@@ -9,7 +9,7 @@ const tags: Tag[] = [
 const items: ImageItem[] = [
   {
     id: "image-1",
-    title: "Referencia institucional",
+    title: "Referência institucional",
     imageUrl: "https://example.com/image-1.png",
     groupIds: ["group-1"],
     tagIds: ["tag-1"],
@@ -23,7 +23,7 @@ const items: ImageItem[] = [
     imageUrl: "https://example.com/image-2.png",
     groupIds: ["group-2"],
     tagIds: ["tag-2"],
-    comments: [{ id: "comment-2", content: "Referencia para posts pagos", createdAt: "2026-01-02T00:00:00.000Z" }],
+    comments: [{ id: "comment-2", content: "Referência para posts pagos", createdAt: "2026-01-02T00:00:00.000Z" }],
     createdAt: "2026-01-02T00:00:00.000Z",
     updatedAt: "2026-01-02T00:00:00.000Z",
   },

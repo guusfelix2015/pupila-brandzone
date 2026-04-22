@@ -13,7 +13,7 @@ describe("PaletteForm", () => {
 
     render(<PaletteForm groups={groups} tags={tags} onSubmit={handleSubmit} />);
 
-    await user.type(screen.getByLabelText("Titulo"), "Paleta institucional");
+    await user.type(screen.getByLabelText("Título"), "Paleta institucional");
     await user.type(screen.getByLabelText("Cores HEX"), "#ffffff, #123abc");
     await user.click(screen.getByLabelText("Branding"));
     await user.click(screen.getByLabelText("Minimalista"));
@@ -36,8 +36,8 @@ describe("PaletteForm", () => {
     await user.type(screen.getByLabelText("Cores HEX"), "azul");
     await user.click(screen.getByRole("button", { name: "Salvar paleta" }));
 
-    expect(await screen.findByText("Campo obrigatorio.")).toBeInTheDocument();
-    expect(await screen.findByText("Use cores HEX validas.")).toBeInTheDocument();
+    expect(await screen.findByText("Campo obrigatório.")).toBeInTheDocument();
+    expect(await screen.findByText("Use cores HEX válidas.")).toBeInTheDocument();
     expect(handleSubmit).not.toHaveBeenCalled();
   });
 

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { HEX_COLOR_PATTERN, normalizeHexColor, parseHexColors } from "@/lib/utils/colors";
 
-const requiredText = z.string().trim().min(1, "Campo obrigatorio.");
+const requiredText = z.string().trim().min(1, "Campo obrigatório.");
 
 export const groupFormSchema = z.object({
   name: requiredText,
@@ -17,7 +17,7 @@ export const commentFormSchema = z.object({
 
 export const imageFormSchema = z.object({
   title: requiredText,
-  imageUrl: z.string().trim().url("Informe uma URL valida."),
+  imageUrl: z.string().trim().url("Informe uma URL válida."),
   groupIds: z.array(z.string()),
   tagIds: z.array(z.string()),
 });
@@ -32,7 +32,7 @@ export const paletteFormSchema = z.object({
     .min(1, "Informe pelo menos uma cor.")
     .refine(
       (value) => parseHexColors(value).every((color) => HEX_COLOR_PATTERN.test(normalizeHexColor(color))),
-      "Use cores HEX validas.",
+      "Use cores HEX válidas.",
     )
     .refine(
       (value) => parseHexColors(value).length <= MAX_PALETTE_COLORS,

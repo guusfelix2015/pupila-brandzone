@@ -26,7 +26,7 @@ export function AppShell({ currentRoute, onNavigate, children }: AppShellProps) 
             <p className="text-sm text-muted-foreground">Arquivo visual local para imagens, paletas e contexto.</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <nav className="flex flex-wrap gap-2" aria-label="Navegacao principal">
+            <nav className="flex flex-wrap gap-2" aria-label="Navegação principal">
               {routeDefinitions.map((route) => (
                 <button
                   key={route.id}

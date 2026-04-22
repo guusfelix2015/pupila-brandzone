@@ -16,7 +16,7 @@ export function TagsPageView({ tagsPageController }: TagsPageViewProps) {
   return (
     <PageShell
       title="Tags"
-      description="Gerencie tags reutilizaveis para classificar imagens e paletas por tema, estilo ou uso."
+      description="Gerencie tags reutilizáveis para classificar imagens e paletas por tema, estilo ou uso."
       action={<Button onClick={tagsPageController.handleOpenCreateTag}>Nova tag</Button>}
       stats={
         <Badge className="inline-flex items-center gap-1.5 border-secondary/60 bg-secondary/30 text-secondary-foreground">

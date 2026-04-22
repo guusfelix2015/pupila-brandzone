@@ -70,19 +70,19 @@ describe("useAppStore", () => {
     const useAppStore = await loadFreshAppStore();
 
     useAppStore.getState().addImage({
-      title: "Referencia",
+      title: "Referência",
       imageUrl: "https://example.com/image.png",
       groupIds: [],
       tagIds: [],
     });
 
     const imageId = useAppStore.getState().images[0].id;
-    useAppStore.getState().addImageComment(imageId, "Comentario inicial");
+    useAppStore.getState().addImageComment(imageId, "Comentário inicial");
 
     const commentId = useAppStore.getState().images[0].comments[0].id;
-    useAppStore.getState().updateImageComment(imageId, commentId, "Comentario editado");
+    useAppStore.getState().updateImageComment(imageId, commentId, "Comentário editado");
 
-    expect(useAppStore.getState().images[0].comments[0].content).toBe("Comentario editado");
+    expect(useAppStore.getState().images[0].comments[0].content).toBe("Comentário editado");
 
     useAppStore.getState().deleteImage(imageId);
 
@@ -100,12 +100,12 @@ describe("useAppStore", () => {
     });
 
     const paletteId = useAppStore.getState().palettes[0].id;
-    useAppStore.getState().addPaletteComment(paletteId, "Comentario inicial");
+    useAppStore.getState().addPaletteComment(paletteId, "Comentário inicial");
 
     const commentId = useAppStore.getState().palettes[0].comments[0].id;
-    useAppStore.getState().updatePaletteComment(paletteId, commentId, "Comentario editado");
+    useAppStore.getState().updatePaletteComment(paletteId, commentId, "Comentário editado");
 
-    expect(useAppStore.getState().palettes[0].comments[0].content).toBe("Comentario editado");
+    expect(useAppStore.getState().palettes[0].comments[0].content).toBe("Comentário editado");
 
     useAppStore.getState().deletePalette(paletteId);
 

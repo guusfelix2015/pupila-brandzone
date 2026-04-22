@@ -28,7 +28,7 @@ export function TagForm({ defaultValues, submitLabel, onSubmit, onCancel }: TagF
     const wasSaved = onSubmit(values);
 
     if (!wasSaved) {
-      setError("name", { message: "Ja existe uma tag com esse nome." });
+      setError("name", { message: "Já existe uma tag com esse nome." });
       return;
     }
 

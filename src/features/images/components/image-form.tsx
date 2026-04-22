@@ -44,7 +44,7 @@ export function ImageForm({ groups, tags, defaultValues, submitLabel, onSubmit, 
 
   return (
     <form className="grid gap-4" onSubmit={handleSubmit(handleValidSubmit)}>
-      <FormField label="Titulo" htmlFor="image-title" error={errors.title?.message}>
+      <FormField label="Título" htmlFor="image-title" error={errors.title?.message}>
         <Input id="image-title" placeholder="Ex: Referencia de campanha" {...register("title")} />
       </FormField>
       <FormField label="URL da imagem" htmlFor="image-url" error={errors.imageUrl?.message}>

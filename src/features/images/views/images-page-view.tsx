@@ -19,7 +19,7 @@ export function ImagesPageView({ imagesPageController }: ImagesPageViewProps) {
   return (
     <PageShell
       title="Imagens"
-      description="Cadastre referencias visuais por URL e organize cada item com grupos, tags e comentarios."
+      description="Cadastre referências visuais por URL e organize cada item com grupos, tags e comentários."
       action={<Button onClick={() => imagesPageController.setCreateDialogOpen(true)}>Nova imagem</Button>}
       stats={
         <Badge className="inline-flex items-center gap-1.5 border-accent bg-accent/50 text-accent-foreground">
@@ -51,7 +51,7 @@ export function ImagesPageView({ imagesPageController }: ImagesPageViewProps) {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Nova imagem</DialogTitle>
-            <DialogDescription>Informe a URL da imagem e seus dados de organizacao.</DialogDescription>
+            <DialogDescription>Informe a URL da imagem e seus dados de organização.</DialogDescription>
           </DialogHeader>
           <ImageForm
             groups={imagesPageController.groups}
@@ -68,7 +68,7 @@ export function ImagesPageView({ imagesPageController }: ImagesPageViewProps) {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Editar imagem</DialogTitle>
-            <DialogDescription>Altere os dados de organizacao desta imagem.</DialogDescription>
+            <DialogDescription>Altere os dados de organização desta imagem.</DialogDescription>
           </DialogHeader>
           {imagesPageController.editingImage ? (
             <ImageForm
@@ -80,7 +80,7 @@ export function ImagesPageView({ imagesPageController }: ImagesPageViewProps) {
                 groupIds: imagesPageController.editingImage.groupIds,
                 tagIds: imagesPageController.editingImage.tagIds,
               }}
-              submitLabel="Salvar alteracoes"
+              submitLabel="Salvar alterações"
               onSubmit={imagesPageController.handleUpdateImage}
               onCancel={imagesPageController.handleCloseEditImage}
             />
@@ -95,18 +95,18 @@ export function ImagesPageView({ imagesPageController }: ImagesPageViewProps) {
         <DialogContent className="flex flex-col overflow-hidden p-0">
           <DialogHeader className="shrink-0 px-6 pt-6">
             <div className="flex items-center gap-2">
-              <DialogTitle>{imagesPageController.selectedImage?.title ?? "Comentarios"}</DialogTitle>
+              <DialogTitle>{imagesPageController.selectedImage?.title ?? "Comentários"}</DialogTitle>
               {imagesPageController.selectedImage ? (
                 <Badge className="inline-flex items-center gap-1 border-muted bg-muted text-muted-foreground">
                   {imagesPageController.selectedImage.comments.length}{" "}
-                  {imagesPageController.selectedImage.comments.length === 1 ? "comentario" : "comentarios"}
+                  {imagesPageController.selectedImage.comments.length === 1 ? "comentário" : "comentários"}
                 </Badge>
               ) : null}
             </div>
             <DialogDescription>
               {imagesPageController.selectedImage
-                ? "Registre observacoes relevantes para esta referencia."
-                : "Registre observacoes relevantes para esta referencia."}
+                ? "Registre observações relevantes para esta referência."
+                : "Registre observações relevantes para esta referência."}
             </DialogDescription>
           </DialogHeader>
           {imagesPageController.selectedImage ? (
@@ -115,7 +115,7 @@ export function ImagesPageView({ imagesPageController }: ImagesPageViewProps) {
                 <CommentForm
                   key={imagesPageController.editingComment?.id ?? "new-comment"}
                   defaultContent={imagesPageController.editingComment?.content}
-                  submitLabel={imagesPageController.editingComment ? "Salvar comentario" : "Adicionar comentario"}
+                  submitLabel={imagesPageController.editingComment ? "Salvar comentário" : "Adicionar comentário"}
                   onSubmit={imagesPageController.handleSubmitComment}
                   onCancel={
                     imagesPageController.editingComment ? imagesPageController.handleCancelEditComment : undefined
@@ -136,7 +136,7 @@ export function ImagesPageView({ imagesPageController }: ImagesPageViewProps) {
       <DeleteConfirmationDialog
         open={Boolean(imagesPageController.deletingImage)}
         title="Excluir imagem"
-        description={`Excluir "${imagesPageController.deletingImage?.title ?? "esta imagem"}"? Esta acao nao pode ser desfeita.`}
+        description={`Excluir "${imagesPageController.deletingImage?.title ?? "esta imagem"}"? Esta ação não pode ser desfeita.`}
         onOpenChange={(open) => {
           if (!open) {
             imagesPageController.handleCancelDeleteImage();

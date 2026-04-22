@@ -10,7 +10,7 @@ describe("form schemas", () => {
   it("validates required text fields", () => {
     expect(groupFormSchema.safeParse({ name: "Branding" }).success).toBe(true);
     expect(tagFormSchema.safeParse({ name: "Minimalista" }).success).toBe(true);
-    expect(commentFormSchema.safeParse({ content: "Comentario relevante" }).success).toBe(true);
+    expect(commentFormSchema.safeParse({ content: "Comentário relevante" }).success).toBe(true);
 
     expect(groupFormSchema.safeParse({ name: "   " }).success).toBe(false);
     expect(tagFormSchema.safeParse({ name: "   " }).success).toBe(false);

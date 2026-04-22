@@ -49,12 +49,12 @@ export function ImageCard({ image, groups, tags, onOpenComments, onEditImage, on
         <EntityBadges groupIds={image.groupIds} tagIds={image.tagIds} groups={groups} tags={tags} />
         <Badge className="w-fit inline-flex items-center gap-1 border-muted bg-muted text-muted-foreground">
           <MessageSquare className="h-3 w-3" />
-          {image.comments.length} {image.comments.length === 1 ? "comentario" : "comentarios"}
+          {image.comments.length} {image.comments.length === 1 ? "comentário" : "comentários"}
         </Badge>
       </CardContent>
       <CardFooter>
         <Button type="button" variant="outline" size="sm" className="w-full" onClick={() => onOpenComments(image)}>
-          Comentarios
+          Comentários
         </Button>
       </CardFooter>
     </Card>

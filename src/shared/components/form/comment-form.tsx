@@ -36,12 +36,12 @@ export function CommentForm({ defaultContent = "", submitLabel, onSubmit, onCanc
       {isEditing ? (
         <div className="flex items-center gap-1.5 text-xs font-medium text-primary">
           <Pencil className="h-3 w-3" />
-          Editando comentario
+          Editando comentário
         </div>
       ) : null}
       <Textarea
         id="content"
-        placeholder={isEditing ? "Edite sua observacao..." : "Adicione uma observacao sobre este item..."}
+        placeholder={isEditing ? "Edite sua observação..." : "Adicione uma observação sobre este item..."}
         rows={2}
         className="resize-none"
         {...register("content")}

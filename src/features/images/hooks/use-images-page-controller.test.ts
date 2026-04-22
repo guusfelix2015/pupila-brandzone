@@ -17,7 +17,7 @@ describe("useImagesPageController", () => {
 
     act(() => {
       result.current.handleCreateImage({
-        title: "Referencia institucional",
+        title: "Referência institucional",
         imageUrl: "https://example.com/image.png",
         groupIds: [],
         tagIds: [],
@@ -25,7 +25,7 @@ describe("useImagesPageController", () => {
     });
 
     expect(result.current.images).toHaveLength(1);
-    expect(result.current.images[0].title).toBe("Referencia institucional");
+    expect(result.current.images[0].title).toBe("Referência institucional");
     expect(result.current.isCreateDialogOpen).toBe(false);
   });
 
@@ -77,7 +77,7 @@ describe("useImagesPageController", () => {
 
     act(() => {
       result.current.handleCreateImage({
-        title: "Referencia institucional",
+        title: "Referência institucional",
         imageUrl: "https://example.com/image.png",
         groupIds: [],
         tagIds: [],
@@ -88,15 +88,15 @@ describe("useImagesPageController", () => {
       result.current.handleOpenComments(result.current.images[0]);
     });
 
-    expect(result.current.selectedImage?.title).toBe("Referencia institucional");
+    expect(result.current.selectedImage?.title).toBe("Referência institucional");
 
     act(() => {
-      result.current.handleSubmitComment({ content: "Comentario inicial" });
+      result.current.handleSubmitComment({ content: "Comentário inicial" });
     });
 
     const comment = result.current.selectedImage?.comments[0];
 
-    expect(comment?.content).toBe("Comentario inicial");
+    expect(comment?.content).toBe("Comentário inicial");
 
     act(() => {
       if (comment) {
@@ -104,13 +104,13 @@ describe("useImagesPageController", () => {
       }
     });
 
-    expect(result.current.editingComment?.content).toBe("Comentario inicial");
+    expect(result.current.editingComment?.content).toBe("Comentário inicial");
 
     act(() => {
-      result.current.handleSubmitComment({ content: "Comentario editado" });
+      result.current.handleSubmitComment({ content: "Comentário editado" });
     });
 
-    expect(result.current.selectedImage?.comments[0].content).toBe("Comentario editado");
+    expect(result.current.selectedImage?.comments[0].content).toBe("Comentário editado");
     expect(result.current.editingComment).toBeUndefined();
 
     act(() => {
@@ -125,7 +125,7 @@ describe("useImagesPageController", () => {
 
     act(() => {
       result.current.handleCreateImage({
-        title: "Referencia institucional",
+        title: "Referência institucional",
         imageUrl: "https://example.com/image.png",
         groupIds: [],
         tagIds: [],
@@ -153,7 +153,7 @@ describe("useImagesPageController", () => {
 
     act(() => {
       result.current.handleCreateImage({
-        title: "Referencia institucional",
+        title: "Referência institucional",
         imageUrl: "https://example.com/image.png",
         groupIds: [],
         tagIds: [],

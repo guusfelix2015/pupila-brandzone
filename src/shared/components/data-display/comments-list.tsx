@@ -18,7 +18,7 @@ export function CommentsList({ comments, onEditComment }: CommentsListProps) {
           <MessageSquare className="h-5 w-5 text-muted-foreground" />
         </div>
         <div>
-          <p className="text-sm font-medium text-foreground">Nenhum comentario</p>
+          <p className="text-sm font-medium text-foreground">Nenhum comentário</p>
           <p className="text-xs text-muted-foreground">Seja o primeiro a adicionar uma observacao.</p>
         </div>
       </div>

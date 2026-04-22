@@ -23,7 +23,7 @@ describe("GroupForm", () => {
 
     await user.click(screen.getByRole("button", { name: "Criar grupo" }));
 
-    expect(await screen.findByText("Campo obrigatorio.")).toBeInTheDocument();
+    expect(await screen.findByText("Campo obrigatório.")).toBeInTheDocument();
     expect(handleSubmit).not.toHaveBeenCalled();
   });
 
@@ -36,7 +36,7 @@ describe("GroupForm", () => {
     await user.type(screen.getByLabelText("Nome do grupo"), "Branding");
     await user.click(screen.getByRole("button", { name: "Criar grupo" }));
 
-    expect(await screen.findByText("Ja existe um grupo com esse nome.")).toBeInTheDocument();
+    expect(await screen.findByText("Já existe um grupo com esse nome.")).toBeInTheDocument();
   });
 
   it("calls cancel when cancel button is available", async () => {

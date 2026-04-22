@@ -28,7 +28,7 @@ export function GroupForm({ defaultValues, submitLabel, onSubmit, onCancel }: Gr
     const wasSaved = onSubmit(values);
 
     if (!wasSaved) {
-      setError("name", { message: "Ja existe um grupo com esse nome." });
+      setError("name", { message: "Já existe um grupo com esse nome." });
       return;
     }
 

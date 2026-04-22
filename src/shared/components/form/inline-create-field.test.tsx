@@ -43,7 +43,7 @@ describe("InlineCreateField", () => {
     await user.type(screen.getByPlaceholderText("Digite..."), "Duplicado");
     await user.click(screen.getByRole("button", { name: "Criar" }));
 
-    expect(screen.getByText("Ja existe um item com esse nome.")).toBeInTheDocument();
+    expect(screen.getByText("Já existe um item com esse nome.")).toBeInTheDocument();
   });
 
   it("shows an error when trying to create with empty value", async () => {
@@ -55,7 +55,7 @@ describe("InlineCreateField", () => {
     await user.click(screen.getByRole("button", { name: "Novo item" }));
     await user.click(screen.getByRole("button", { name: "Criar" }));
 
-    expect(screen.getByText("Nome obrigatorio.")).toBeInTheDocument();
+    expect(screen.getByText("Nome obrigatório.")).toBeInTheDocument();
     expect(onCreate).not.toHaveBeenCalled();
   });
 

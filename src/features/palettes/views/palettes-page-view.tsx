@@ -19,7 +19,7 @@ export function PalettesPageView({ palettesPageController }: PalettesPageViewPro
   return (
     <PageShell
       title="Paletas"
-      description="Crie conjuntos de cores e organize cada paleta com grupos, tags e comentarios."
+      description="Crie conjuntos de cores e organize cada paleta com grupos, tags e comentários."
       action={<Button onClick={() => palettesPageController.setCreateDialogOpen(true)}>Nova paleta</Button>}
       stats={
         <Badge className="inline-flex items-center gap-1.5 border-secondary/60 bg-secondary/30 text-secondary-foreground">
@@ -54,7 +54,7 @@ export function PalettesPageView({ palettesPageController }: PalettesPageViewPro
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Nova paleta</DialogTitle>
-            <DialogDescription>Informe as cores HEX e seus dados de organizacao.</DialogDescription>
+            <DialogDescription>Informe as cores HEX e seus dados de organização.</DialogDescription>
           </DialogHeader>
           <PaletteForm
             groups={palettesPageController.groups}
@@ -71,7 +71,7 @@ export function PalettesPageView({ palettesPageController }: PalettesPageViewPro
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Editar paleta</DialogTitle>
-            <DialogDescription>Altere os dados de organizacao desta paleta.</DialogDescription>
+            <DialogDescription>Altere os dados de organização desta paleta.</DialogDescription>
           </DialogHeader>
           {palettesPageController.editingPalette ? (
             <PaletteForm
@@ -83,7 +83,7 @@ export function PalettesPageView({ palettesPageController }: PalettesPageViewPro
                 groupIds: palettesPageController.editingPalette.groupIds,
                 tagIds: palettesPageController.editingPalette.tagIds,
               }}
-              submitLabel="Salvar alteracoes"
+              submitLabel="Salvar alterações"
               onSubmit={palettesPageController.handleUpdatePalette}
               onCancel={palettesPageController.handleCloseEditPalette}
             />
@@ -98,18 +98,18 @@ export function PalettesPageView({ palettesPageController }: PalettesPageViewPro
         <DialogContent className="flex flex-col overflow-hidden p-0">
           <DialogHeader className="shrink-0 px-6 pt-6">
             <div className="flex items-center gap-2">
-              <DialogTitle>{palettesPageController.selectedPalette?.title ?? "Comentarios"}</DialogTitle>
+              <DialogTitle>{palettesPageController.selectedPalette?.title ?? "Comentários"}</DialogTitle>
               {palettesPageController.selectedPalette ? (
                 <Badge className="inline-flex items-center gap-1 border-muted bg-muted text-muted-foreground">
                   {palettesPageController.selectedPalette.comments.length}{" "}
-                  {palettesPageController.selectedPalette.comments.length === 1 ? "comentario" : "comentarios"}
+                  {palettesPageController.selectedPalette.comments.length === 1 ? "comentário" : "comentários"}
                 </Badge>
               ) : null}
             </div>
             <DialogDescription>
               {palettesPageController.selectedPalette
-                ? "Registre observacoes relevantes para esta paleta."
-                : "Registre observacoes relevantes para esta paleta."}
+                ? "Registre observações relevantes para esta paleta."
+                : "Registre observações relevantes para esta paleta."}
             </DialogDescription>
           </DialogHeader>
           {palettesPageController.selectedPalette ? (
@@ -118,7 +118,7 @@ export function PalettesPageView({ palettesPageController }: PalettesPageViewPro
                 <CommentForm
                   key={palettesPageController.editingComment?.id ?? "new-comment"}
                   defaultContent={palettesPageController.editingComment?.content}
-                  submitLabel={palettesPageController.editingComment ? "Salvar comentario" : "Adicionar comentario"}
+                  submitLabel={palettesPageController.editingComment ? "Salvar comentário" : "Adicionar comentário"}
                   onSubmit={palettesPageController.handleSubmitComment}
                   onCancel={
                     palettesPageController.editingComment ? palettesPageController.handleCancelEditComment : undefined
@@ -139,7 +139,7 @@ export function PalettesPageView({ palettesPageController }: PalettesPageViewPro
       <DeleteConfirmationDialog
         open={Boolean(palettesPageController.deletingPalette)}
         title="Excluir paleta"
-        description={`Excluir "${palettesPageController.deletingPalette?.title ?? "esta paleta"}"? Esta acao nao pode ser desfeita.`}
+        description={`Excluir "${palettesPageController.deletingPalette?.title ?? "esta paleta"}"? Esta ação não pode ser desfeita.`}
         onOpenChange={(open) => {
           if (!open) {
             palettesPageController.handleCancelDeletePalette();

@@ -13,14 +13,14 @@ describe("ImageForm", () => {
 
     render(<ImageForm groups={groups} tags={tags} onSubmit={handleSubmit} />);
 
-    await user.type(screen.getByLabelText("Titulo"), "Referencia institucional");
+    await user.type(screen.getByLabelText("Título"), "Referência institucional");
     await user.type(screen.getByLabelText("URL da imagem"), "https://example.com/image.png");
     await user.click(screen.getByLabelText("Branding"));
     await user.click(screen.getByLabelText("Minimalista"));
     await user.click(screen.getByRole("button", { name: "Salvar imagem" }));
 
     expect(handleSubmit).toHaveBeenCalledWith({
-      title: "Referencia institucional",
+      title: "Referência institucional",
       imageUrl: "https://example.com/image.png",
       groupIds: ["group-1"],
       tagIds: ["tag-1"],
@@ -36,8 +36,8 @@ describe("ImageForm", () => {
     await user.type(screen.getByLabelText("URL da imagem"), "not-a-url");
     await user.click(screen.getByRole("button", { name: "Salvar imagem" }));
 
-    expect(await screen.findByText("Campo obrigatorio.")).toBeInTheDocument();
-    expect(await screen.findByText("Informe uma URL valida.")).toBeInTheDocument();
+    expect(await screen.findByText("Campo obrigatório.")).toBeInTheDocument();
+    expect(await screen.findByText("Informe uma URL válida.")).toBeInTheDocument();
     expect(handleSubmit).not.toHaveBeenCalled();
   });
 

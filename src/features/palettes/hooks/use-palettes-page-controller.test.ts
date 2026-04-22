@@ -92,12 +92,12 @@ describe("usePalettesPageController", () => {
     expect(result.current.selectedPalette?.title).toBe("Paleta institucional");
 
     act(() => {
-      result.current.handleSubmitComment({ content: "Comentario inicial" });
+      result.current.handleSubmitComment({ content: "Comentário inicial" });
     });
 
     const comment = result.current.selectedPalette?.comments[0];
 
-    expect(comment?.content).toBe("Comentario inicial");
+    expect(comment?.content).toBe("Comentário inicial");
 
     act(() => {
       if (comment) {
@@ -105,13 +105,13 @@ describe("usePalettesPageController", () => {
       }
     });
 
-    expect(result.current.editingComment?.content).toBe("Comentario inicial");
+    expect(result.current.editingComment?.content).toBe("Comentário inicial");
 
     act(() => {
-      result.current.handleSubmitComment({ content: "Comentario editado" });
+      result.current.handleSubmitComment({ content: "Comentário editado" });
     });
 
-    expect(result.current.selectedPalette?.comments[0].content).toBe("Comentario editado");
+    expect(result.current.selectedPalette?.comments[0].content).toBe("Comentário editado");
     expect(result.current.editingComment).toBeUndefined();
 
     act(() => {

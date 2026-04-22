@@ -23,7 +23,7 @@ describe("TagForm", () => {
 
     await user.click(screen.getByRole("button", { name: "Criar tag" }));
 
-    expect(await screen.findByText("Campo obrigatorio.")).toBeInTheDocument();
+    expect(await screen.findByText("Campo obrigatório.")).toBeInTheDocument();
     expect(handleSubmit).not.toHaveBeenCalled();
   });
 
@@ -36,7 +36,7 @@ describe("TagForm", () => {
     await user.type(screen.getByLabelText("Nome da tag"), "Minimalista");
     await user.click(screen.getByRole("button", { name: "Criar tag" }));
 
-    expect(await screen.findByText("Ja existe uma tag com esse nome.")).toBeInTheDocument();
+    expect(await screen.findByText("Já existe uma tag com esse nome.")).toBeInTheDocument();
   });
 
   it("calls cancel when cancel button is available", async () => {

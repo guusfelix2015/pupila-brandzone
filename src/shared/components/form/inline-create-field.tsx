@@ -29,7 +29,7 @@ export function InlineCreateField({ label, placeholder, onCreate }: InlineCreate
   function handleSubmit(): void {
     const trimmed = value.trim();
     if (!trimmed) {
-      setError("Nome obrigatorio.");
+      setError("Nome obrigatório.");
       return;
     }
     const success = onCreate(trimmed);
@@ -38,7 +38,7 @@ export function InlineCreateField({ label, placeholder, onCreate }: InlineCreate
       setValue("");
       setError(null);
     } else {
-      setError("Ja existe um item com esse nome.");
+      setError("Já existe um item com esse nome.");
     }
   }
 

@@ -70,12 +70,12 @@ export function PaletteCard({
         <EntityBadges groupIds={palette.groupIds} tagIds={palette.tagIds} groups={groups} tags={tags} />
         <Badge className="w-fit inline-flex items-center gap-1 border-muted bg-muted text-muted-foreground">
           <MessageSquare className="h-3 w-3" />
-          {palette.comments.length} {palette.comments.length === 1 ? "comentario" : "comentarios"}
+          {palette.comments.length} {palette.comments.length === 1 ? "comentário" : "comentários"}
         </Badge>
       </CardContent>
       <CardFooter>
         <Button type="button" variant="outline" size="sm" className="w-full" onClick={() => onOpenComments(palette)}>
-          Comentarios
+          Comentários
         </Button>
       </CardFooter>
     </Card>

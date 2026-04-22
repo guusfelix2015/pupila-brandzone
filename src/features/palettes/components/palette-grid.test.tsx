@@ -14,7 +14,7 @@ const palette: PaletteItem = {
   ],
   groupIds: ["group-1"],
   tagIds: ["tag-1"],
-  comments: [{ id: "comment-1", content: "Comentario", createdAt: "2026-01-01T00:00:00.000Z" }],
+  comments: [{ id: "comment-1", content: "Comentário", createdAt: "2026-01-01T00:00:00.000Z" }],
   createdAt: "2026-01-01T00:00:00.000Z",
   updatedAt: "2026-01-01T00:00:00.000Z",
 };
@@ -75,9 +75,9 @@ describe("PaletteGrid", () => {
     expect(screen.getByText("#123ABC")).toBeInTheDocument();
     expect(screen.getByText("Grupo: Branding")).toBeInTheDocument();
     expect(screen.getByText("Tag: Minimalista")).toBeInTheDocument();
-    expect(screen.getByText("1 comentario")).toBeInTheDocument();
+    expect(screen.getByText("1 comentário")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: "Comentarios" }));
+    await user.click(screen.getByRole("button", { name: "Comentários" }));
     await user.click(screen.getByRole("button", { name: "Editar paleta" }));
     await user.click(screen.getByRole("button", { name: "Excluir paleta" }));
 
