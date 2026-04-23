@@ -2,7 +2,12 @@ import type { ReactNode } from "react";
 import type { AppRoute, Route } from "@/app/routes/routes";
 import { routeDefinitions, ROUTE } from "@/app/routes/routes";
 import { cn } from "@/lib/utils/cn";
+import { getInitialsFromContent } from "@/lib/utils/text";
 import { Button } from "@/shared/ui/button";
+import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
+import { useAuthStore } from "@/store/auth-store";
+import { toast } from "sonner";
 
 export type AppShellProps = {
   currentRoute: AppRoute;
@@ -11,6 +16,9 @@ export type AppShellProps = {
 };
 
 export function AppShell({ currentRoute, onNavigate, children }: AppShellProps) {
+  const currentUser = useAuthStore((state) => state.currentUser);
+  const signOut = useAuthStore((state) => state.signOut);
+
   return (
     <div className="min-h-screen text-foreground">
       <header className="sticky top-0 z-40 px-4 py-5">
@@ -41,9 +49,47 @@ export function AppShell({ currentRoute, onNavigate, children }: AppShellProps) 
                 </button>
               ))}
             </nav>
-            <Button type="button" variant="outline" size="sm" onClick={() => onNavigate(ROUTE.SIGNIN)}>
-              Entrar
-            </Button>
+            {currentUser ? (
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button
+                    type="button"
+                    className="rounded-full transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    aria-label="Abrir menu do usuário"
+                  >
+                    <Avatar className="h-10 w-10 ring-1 ring-white/10">
+                      <AvatarFallback>
+                        {currentUser.name ? getInitialsFromContent(currentUser.name) : currentUser.email[0]}
+                      </AvatarFallback>
+                    </Avatar>
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent align="end" className="grid gap-4">
+                  <div className="grid gap-1">
+                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-foreground/58">Sessão ativa</p>
+                    <p className="text-sm font-medium text-foreground">{currentUser.email}</p>
+                  </div>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      signOut();
+                      toast.success("Sessão encerrada.", {
+                        description: "Você saiu do Brand Zone.",
+                      });
+                      onNavigate(ROUTE.SIGNIN);
+                    }}
+                  >
+                    Sair
+                  </Button>
+                </PopoverContent>
+              </Popover>
+            ) : (
+              <Button type="button" variant="outline" size="sm" onClick={() => onNavigate(ROUTE.SIGNIN)}>
+                Entrar
+              </Button>
+            )}
           </div>
         </div>
       </header>

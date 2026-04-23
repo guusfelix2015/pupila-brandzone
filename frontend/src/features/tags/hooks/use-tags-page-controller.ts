@@ -3,6 +3,7 @@ import type { Tag } from "@/core/types/domain";
 import type { TagFormValues } from "@/lib/validation/schemas";
 import { getTagCounts, type EntityCounts } from "@/lib/utils/entity-counts";
 import { useAppStore } from "@/store/app-store";
+import { toast } from "sonner";
 
 export type TagsPageController = {
   tags: Tag[];
@@ -48,8 +49,15 @@ export function useTagsPageController(): TagsPageController {
     const wasSaved = editingTag ? updateTag(editingTag.id, values.name) : addTag(values.name);
 
     if (wasSaved) {
+      toast.success(editingTag ? "Tag atualizada." : "Tag criada.", {
+        description: editingTag ? "As alterações foram salvas." : "A tag já pode ser usada nos itens.",
+      });
       setEditingTag(undefined);
       setFormDialogOpen(false);
+    } else {
+      toast.error("Não foi possível salvar a tag.", {
+        description: "Já existe uma tag com este nome.",
+      });
     }
 
     return wasSaved;
@@ -75,6 +83,9 @@ export function useTagsPageController(): TagsPageController {
   function handleConfirmDeleteTag(): void {
     if (deletingTagId) {
       deleteTag(deletingTagId);
+      toast.success("Tag removida.", {
+        description: "Os itens foram mantidos e desassociados da tag.",
+      });
       setDeletingTagId(undefined);
     }
   }

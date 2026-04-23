@@ -3,6 +3,7 @@ import type { Group } from "@/core/types/domain";
 import type { GroupFormValues } from "@/lib/validation/schemas";
 import { getGroupCounts, type EntityCounts } from "@/lib/utils/entity-counts";
 import { useAppStore } from "@/store/app-store";
+import { toast } from "sonner";
 
 export type GroupsPageController = {
   groups: Group[];
@@ -48,8 +49,15 @@ export function useGroupsPageController(): GroupsPageController {
     const wasSaved = editingGroup ? updateGroup(editingGroup.id, values.name) : addGroup(values.name);
 
     if (wasSaved) {
+      toast.success(editingGroup ? "Grupo atualizado." : "Grupo criado.", {
+        description: editingGroup ? "As alterações foram salvas." : "O grupo já está disponível para uso.",
+      });
       setEditingGroup(undefined);
       setFormDialogOpen(false);
+    } else {
+      toast.error("Não foi possível salvar o grupo.", {
+        description: "Já existe um grupo com este nome.",
+      });
     }
 
     return wasSaved;
@@ -75,6 +83,9 @@ export function useGroupsPageController(): GroupsPageController {
   function handleConfirmDeleteGroup(): void {
     if (deletingGroupId) {
       deleteGroup(deletingGroupId);
+      toast.success("Grupo removido.", {
+        description: "Os itens foram mantidos e desassociados do grupo.",
+      });
       setDeletingGroupId(undefined);
     }
   }

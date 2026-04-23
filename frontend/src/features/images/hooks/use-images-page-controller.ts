@@ -4,6 +4,7 @@ import type { CommentFormValues, ImageFormValues } from "@/lib/validation/schema
 import { filterItemsByGroupAndTag } from "@/lib/filters/filter-items";
 import { searchItemsByQuery } from "@/lib/search/search-items";
 import { useAppStore } from "@/store/app-store";
+import { toast } from "sonner";
 
 export type ImagesPageController = {
   images: ImageItem[];
@@ -68,6 +69,9 @@ export function useImagesPageController(): ImagesPageController {
   function handleCreateImage(values: ImageFormValues): void {
     addImage(values);
     setCreateDialogOpen(false);
+    toast.success("Imagem criada.", {
+      description: "A referência visual foi adicionada ao acervo.",
+    });
   }
 
   function handleUpdateImage(values: ImageFormValues): void {
@@ -80,11 +84,17 @@ export function useImagesPageController(): ImagesPageController {
       tagIds: values.tagIds,
     });
     setEditingImageId(undefined);
+    toast.success("Imagem atualizada.", {
+      description: "As alterações da referência foram salvas.",
+    });
   }
 
   function handleConfirmDeleteImage(): void {
     if (deletingImageId) {
       deleteImage(deletingImageId);
+      toast.success("Imagem removida.", {
+        description: "A referência foi excluída do acervo.",
+      });
       setDeletingImageId(undefined);
     }
   }
@@ -96,16 +106,25 @@ export function useImagesPageController(): ImagesPageController {
 
   function handleSubmitComment(values: CommentFormValues): void {
     if (!selectedImage) {
+      toast.error("Nenhuma imagem selecionada.", {
+        description: "Abra uma imagem antes de adicionar comentários.",
+      });
       return;
     }
 
     if (editingComment) {
       updateImageComment(selectedImage.id, editingComment.id, values.content);
       setEditingComment(undefined);
+      toast.success("Comentário atualizado.", {
+        description: "A observação da imagem foi salva.",
+      });
       return;
     }
 
     addImageComment(selectedImage.id, values.content);
+    toast.success("Comentário adicionado.", {
+      description: "A observação foi registrada na imagem.",
+    });
   }
 
   return {

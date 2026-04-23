@@ -6,6 +6,7 @@ import { filterItemsByGroupAndTag } from "@/lib/filters/filter-items";
 import { searchItemsByQuery } from "@/lib/search/search-items";
 import { parseHexColors } from "@/lib/utils/colors";
 import { useAppStore } from "@/store/app-store";
+import { toast } from "sonner";
 
 export type PalettesPageController = {
   palettes: PaletteItem[];
@@ -78,6 +79,9 @@ export function usePalettesPageController(): PalettesPageController {
       tagIds: values.tagIds,
     });
     setCreateDialogOpen(false);
+    toast.success("Paleta criada.", {
+      description: "A nova paleta foi adicionada ao acervo.",
+    });
   }
 
   function handleUpdatePalette(values: PaletteFormValues): void {
@@ -90,11 +94,17 @@ export function usePalettesPageController(): PalettesPageController {
       tagIds: values.tagIds,
     });
     setEditingPaletteId(undefined);
+    toast.success("Paleta atualizada.", {
+      description: "As alterações da paleta foram salvas.",
+    });
   }
 
   function handleConfirmDeletePalette(): void {
     if (deletingPaletteId) {
       deletePalette(deletingPaletteId);
+      toast.success("Paleta removida.", {
+        description: "A paleta foi excluída do acervo.",
+      });
       setDeletingPaletteId(undefined);
     }
   }
@@ -106,16 +116,25 @@ export function usePalettesPageController(): PalettesPageController {
 
   function handleSubmitComment(values: CommentFormValues): void {
     if (!selectedPalette) {
+      toast.error("Nenhuma paleta selecionada.", {
+        description: "Abra uma paleta antes de adicionar comentários.",
+      });
       return;
     }
 
     if (editingComment) {
       updatePaletteComment(selectedPalette.id, editingComment.id, values.content);
       setEditingComment(undefined);
+      toast.success("Comentário atualizado.", {
+        description: "A observação da paleta foi salva.",
+      });
       return;
     }
 
     addPaletteComment(selectedPalette.id, values.content);
+    toast.success("Comentário adicionado.", {
+      description: "A observação foi registrada na paleta.",
+    });
   }
 
   return {
