@@ -1,4 +1,4 @@
-import { AppRoutes, useHashRoute } from "@/app/routes/routes";
+import { AppRoutes, isAppRoute, useHashRoute } from "@/app/routes/routes";
 import { AppProviders } from "@/app/providers/app-providers";
 import { AppShell } from "@/shared/components/layout/app-shell";
 
@@ -7,9 +7,13 @@ export function App() {
 
   return (
     <AppProviders>
-      <AppShell currentRoute={route} onNavigate={navigate}>
+      {isAppRoute(route) ? (
+        <AppShell currentRoute={route} onNavigate={navigate}>
+          <AppRoutes route={route} />
+        </AppShell>
+      ) : (
         <AppRoutes route={route} />
-      </AppShell>
+      )}
     </AppProviders>
   );
 }

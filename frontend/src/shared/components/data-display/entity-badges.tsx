@@ -1,9 +1,14 @@
 import type { Group, ID, Tag } from "@/core/types/domain";
 import { Badge } from "@/shared/ui/badge";
 
+export const ENTITY_BADGE_TYPE = {
+  GROUP: "group",
+  TAG: "tag",
+} as const;
+
 const entityBadgeClasses = {
-  group: "border-accent/70 bg-accent/95 text-black shadow-sm shadow-accent/10",
-  tag: "border-secondary/70 bg-secondary/90 text-black shadow-sm shadow-secondary/10",
+  [ENTITY_BADGE_TYPE.GROUP]: "border-accent/70 bg-accent/95 text-black shadow-sm shadow-accent/10",
+  [ENTITY_BADGE_TYPE.TAG]: "border-secondary/70 bg-secondary/90 text-black shadow-sm shadow-secondary/10",
 };
 
 export type EntityBadgesProps = {
@@ -17,7 +22,7 @@ export type EntityBadgesProps = {
 type BadgeItem = {
   id: string;
   label: string;
-  type: "group" | "tag";
+  type: (typeof ENTITY_BADGE_TYPE)[keyof typeof ENTITY_BADGE_TYPE];
 };
 
 export function EntityBadges({ groupIds, tagIds, groups, tags, limit = 6 }: EntityBadgesProps) {
@@ -27,8 +32,8 @@ export function EntityBadges({ groupIds, tagIds, groups, tags, limit = 6 }: Enti
   const selectedTags = tagIds.map((tagId) => tags.find((tag) => tag.id === tagId)).filter(Boolean) as Tag[];
 
   const allItems: BadgeItem[] = [
-    ...selectedGroups.map((g) => ({ id: g.id, label: g.name, type: "group" as const })),
-    ...selectedTags.map((t) => ({ id: t.id, label: t.name, type: "tag" as const })),
+    ...selectedGroups.map((g) => ({ id: g.id, label: g.name, type: ENTITY_BADGE_TYPE.GROUP })),
+    ...selectedTags.map((t) => ({ id: t.id, label: t.name, type: ENTITY_BADGE_TYPE.TAG })),
   ];
 
   if (allItems.length === 0) {
@@ -45,7 +50,7 @@ export function EntityBadges({ groupIds, tagIds, groups, tags, limit = 6 }: Enti
           key={item.id}
           className={entityBadgeClasses[item.type]}
         >
-          {item.type === "group" ? "Grupo:" : "Tag:"} {item.label}
+          {item.type === ENTITY_BADGE_TYPE.GROUP ? "Grupo:" : "Tag:"} {item.label}
         </Badge>
       ))}
 
@@ -61,7 +66,7 @@ export function EntityBadges({ groupIds, tagIds, groups, tags, limit = 6 }: Enti
                   key={item.id}
                   className={entityBadgeClasses[item.type]}
                 >
-                  {item.type === "group" ? "G:" : "T:"} {item.label}
+                  {item.type === ENTITY_BADGE_TYPE.GROUP ? "G:" : "T:"} {item.label}
                 </Badge>
               ))}
             </div>

@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
-import type { AppRoute } from "@/app/routes/routes";
-import { routeDefinitions } from "@/app/routes/routes";
+import type { AppRoute, Route } from "@/app/routes/routes";
+import { routeDefinitions, ROUTE } from "@/app/routes/routes";
 import { cn } from "@/lib/utils/cn";
+import { Button } from "@/shared/ui/button";
 
 export type AppShellProps = {
   currentRoute: AppRoute;
-  onNavigate: (route: AppRoute) => void;
+  onNavigate: (route: Route) => void;
   children: ReactNode;
 };
 
@@ -40,6 +41,9 @@ export function AppShell({ currentRoute, onNavigate, children }: AppShellProps) 
                 </button>
               ))}
             </nav>
+            <Button type="button" variant="outline" size="sm" onClick={() => onNavigate(ROUTE.SIGNIN)}>
+              Entrar
+            </Button>
           </div>
         </div>
       </header>
