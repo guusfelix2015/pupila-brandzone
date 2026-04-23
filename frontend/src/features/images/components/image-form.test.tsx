@@ -47,4 +47,15 @@ describe("ImageForm", () => {
     expect(screen.getByText("Crie grupos antes de associar.")).toBeInTheDocument();
     expect(screen.getByText("Crie tags antes de associar.")).toBeInTheDocument();
   });
+
+  it("renders and triggers cancel button when provided", async () => {
+    const user = userEvent.setup();
+    const handleCancel = jest.fn();
+
+    render(<ImageForm groups={groups} tags={tags} onSubmit={jest.fn()} onCancel={handleCancel} />);
+
+    await user.click(screen.getByRole("button", { name: "Cancelar" }));
+
+    expect(handleCancel).toHaveBeenCalled();
+  });
 });
