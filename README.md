@@ -28,7 +28,7 @@ O MVP implementa:
 - comentários em imagens e paletas;
 - busca por título, comentário e tag;
 - filtros por grupo e tag;
-- telas de login e cadastro preparadas para integração futura com backend;
+- login e signup simulados para facilitar o fluxo de navegação e análise do teste (sem backend real);
 - persistência local com `localStorage`;
 - testes unitários das camadas principais.
 

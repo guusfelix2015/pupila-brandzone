@@ -273,7 +273,7 @@ Detalhes de interface considerados intencionalmente:
 - **Contadores por página**: imagens, paletas, grupos e tags exibem quantidade total no cabeçalho;
 - **Cards com overflow controlado**: quando há muitos grupos ou tags, a interface resume o excesso em `+N` e revela o restante em hover;
 - **Visualização de paletas**: o usuário pode alternar entre leitura em grade, lista compacta e detalhes sem sair da tela;
-- **Autenticação visual**: login e cadastro existem como preparação de fluxo e composição visual, sem backend funcional neste momento;
+- **Autenticação simulada**: login e signup são simulados localmente para viabilizar o fluxo de navegação e análise do teste. Não há backend real, comunicação com servidor ou criptografia de senha. O estado do usuário é mantido apenas em memória durante a sessão, sem persistência de credenciais;
 - **Consistência visual**: grids, listas, badges, dialogs e formulários seguem padrão previsível entre os módulos.
 
 ## Fechamento
