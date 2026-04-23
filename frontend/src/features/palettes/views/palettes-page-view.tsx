@@ -22,7 +22,7 @@ export function PalettesPageView({ palettesPageController }: PalettesPageViewPro
       description="Crie conjuntos de cores e organize cada paleta com grupos, tags e comentários."
       action={<Button onClick={() => palettesPageController.setCreateDialogOpen(true)}>Nova paleta</Button>}
       stats={
-        <Badge className="inline-flex items-center gap-1.5 border-secondary/60 bg-secondary/30 text-secondary-foreground">
+        <Badge className="inline-flex items-center gap-1.5 border-transparent bg-secondary/90 text-black shadow-sm shadow-secondary/10">
           <Palette className="h-3 w-3" />
           {palettesPageController.palettes.length} {palettesPageController.palettes.length === 1 ? "paleta" : "paletas"}
         </Badge>
