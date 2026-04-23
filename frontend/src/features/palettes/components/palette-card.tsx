@@ -24,7 +24,7 @@ export function PaletteCard({
   onDeletePalette,
 }: PaletteCardProps) {
   return (
-    <Card className="transition-transform hover:-translate-y-0.5">
+    <Card className="overflow-hidden transition-transform hover:-translate-y-0.5">
       <CardHeader className="flex flex-row items-start justify-between gap-3">
         <CardTitle className="line-clamp-2">{palette.title}</CardTitle>
         <div className="flex shrink-0 gap-1">
@@ -53,7 +53,7 @@ export function PaletteCard({
       <CardContent className="grid gap-4">
         <div
           className={cn(
-            "grid overflow-hidden rounded-md border",
+            "grid min-h-28 overflow-hidden rounded-[12px] border border-transparent bg-black/25 p-1 shadow-inner shadow-black/30 ring-1 ring-black/50",
             palette.colors.length === 1 && "grid-cols-1",
             palette.colors.length === 2 && "grid-cols-2",
             palette.colors.length === 3 && "grid-cols-3",
@@ -62,16 +62,24 @@ export function PaletteCard({
           )}
         >
           {palette.colors.map((color) => (
-            <div key={color.id} className="grid min-h-20 place-items-center" style={{ backgroundColor: color.hex }}>
-              <span className="rounded-md bg-background/85 px-2 py-1 text-xs font-medium">{color.hex}</span>
+            <div
+              key={color.id}
+              className="group relative min-h-24 overflow-hidden first:rounded-l-[8px] last:rounded-r-[8px]"
+              style={{ backgroundColor: color.hex }}
+            >
+              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[8px] bg-black/70 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.06em] text-white shadow-sm backdrop-blur">
+                {color.hex}
+              </span>
             </div>
           ))}
         </div>
-        <EntityBadges groupIds={palette.groupIds} tagIds={palette.tagIds} groups={groups} tags={tags} />
-        <Badge className="w-fit inline-flex items-center gap-1 border-white/15 bg-white/12 text-white/82">
-          <MessageSquare className="h-3 w-3" />
-          {palette.comments.length} {palette.comments.length === 1 ? "comentário" : "comentários"}
-        </Badge>
+        <div className="grid gap-3 rounded-[12px] border border-transparent bg-white/[0.03] p-3 ring-1 ring-black/40">
+          <EntityBadges groupIds={palette.groupIds} tagIds={palette.tagIds} groups={groups} tags={tags} />
+          <Badge className="w-fit inline-flex items-center gap-1 border-transparent bg-white/12 text-white/82 ring-1 ring-black/40">
+            <MessageSquare className="h-3 w-3" />
+            {palette.comments.length} {palette.comments.length === 1 ? "comentário" : "comentários"}
+          </Badge>
+        </div>
       </CardContent>
       <CardFooter>
         <Button type="button" variant="outline" size="sm" className="w-full" onClick={() => onOpenComments(palette)}>

@@ -33,7 +33,7 @@ export function TagList({ tags, tagCounts, onEditTag, onDeleteTag }: TagListProp
         return (
           <div
             key={tag.id}
-            className="group relative flex flex-col gap-3 rounded-lg border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+            className="group relative flex flex-col gap-3 rounded-[15px] border border-transparent bg-card/80 p-4 shadow-sm shadow-black/20 ring-1 ring-black/40 transition-all duration-200 hover:-translate-y-0.5 hover:bg-card hover:ring-primary/35"
             style={
               {
                 animationDelay: `${index * 40}ms`,

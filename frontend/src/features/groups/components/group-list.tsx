@@ -41,7 +41,7 @@ export function GroupList({ groups, groupCounts, onEditGroup, onDeleteGroup }: G
         return (
           <div
             key={group.id}
-            className="group relative flex items-center gap-4 rounded-lg border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+            className="group relative flex items-center gap-4 rounded-[15px] border border-transparent bg-card/80 p-4 shadow-sm shadow-black/20 ring-1 ring-black/40 transition-all duration-200 hover:-translate-y-0.5 hover:bg-card hover:ring-primary/35"
             style={
               {
                 animationDelay: `${index * 40}ms`,
@@ -60,7 +60,9 @@ export function GroupList({ groups, groupCounts, onEditGroup, onDeleteGroup }: G
               <div className="flex items-center gap-2">
                 <h3 className="truncate text-base font-semibold text-foreground">{group.name}</h3>
                 {counts.total === 0 && (
-                  <Badge className="shrink-0 bg-muted text-muted-foreground border-0">Vazio</Badge>
+                  <Badge className="shrink-0 border-transparent bg-white/10 text-white/70 ring-1 ring-black/40">
+                    Vazio
+                  </Badge>
                 )}
               </div>
 
@@ -72,7 +74,7 @@ export function GroupList({ groups, groupCounts, onEditGroup, onDeleteGroup }: G
                   </span>
                 )}
                 {counts.palettes > 0 && (
-                  <span className="inline-flex items-center gap-1 rounded-md bg-secondary/40 px-2 py-0.5 text-secondary-foreground">
+                  <span className="inline-flex items-center gap-1 rounded-md bg-secondary/90 px-2 py-0.5 text-black">
                     <Palette className="h-3 w-3" />
                     {counts.palettes} {counts.palettes === 1 ? "paleta" : "paletas"}
                   </span>
