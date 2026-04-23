@@ -1,7 +1,10 @@
 import { AuthCard } from "@/features/auth/components/auth-card";
+import { useSignUpPageController } from "@/features/auth/hooks/use-sign-up-page-controller";
 import { AuthPageShell } from "@/features/auth/components/auth-page-shell";
 
 export function SignUpPage() {
+  const signUpPageController = useSignUpPageController();
+
   return (
     <AuthPageShell
       eyebrow="Workspace visual"
@@ -14,8 +17,10 @@ export function SignUpPage() {
         submitLabel="Criar conta"
         switchText="Já tem conta?"
         switchLabel="Entrar"
-        switchRoute="signin"
+        switchRoute={signUpPageController.switchRoute}
         showNameField
+        submitError={signUpPageController.submitError}
+        onSubmit={signUpPageController.handleSubmit}
       />
     </AuthPageShell>
   );

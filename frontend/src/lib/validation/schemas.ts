@@ -22,6 +22,9 @@ export const imageFormSchema = z.object({
   tagIds: z.array(z.string()),
 });
 
+const emailField = z.string().trim().email("Informe um email válido.");
+const passwordField = z.string().min(6, "A senha deve ter pelo menos 6 caracteres.");
+
 const MAX_PALETTE_COLORS = 10;
 
 export const paletteFormSchema = z.object({
@@ -47,3 +50,17 @@ export type TagFormValues = z.infer<typeof tagFormSchema>;
 export type CommentFormValues = z.infer<typeof commentFormSchema>;
 export type ImageFormValues = z.infer<typeof imageFormSchema>;
 export type PaletteFormValues = z.infer<typeof paletteFormSchema>;
+
+export const signInFormSchema = z.object({
+  email: emailField,
+  password: passwordField,
+});
+
+export const signUpFormSchema = z.object({
+  name: requiredText,
+  email: emailField,
+  password: passwordField,
+});
+
+export type SignInFormValues = z.infer<typeof signInFormSchema>;
+export type SignUpFormValues = z.infer<typeof signUpFormSchema>;

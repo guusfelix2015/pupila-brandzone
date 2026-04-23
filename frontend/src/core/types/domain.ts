@@ -52,9 +52,25 @@ export type Filters = {
 
 export type VisualItem = ImageItem | PaletteItem;
 
+export type AuthAccount = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+export type AuthSession = {
+  name: string;
+  email: string;
+};
+
 export type PersistedAppState = {
   images: ImageItem[];
   palettes: PaletteItem[];
   groups: Group[];
   tags: Tag[];
+};
+
+export type PersistedAuthState = {
+  registeredUser?: AuthAccount;
+  currentUser?: AuthSession;
 };

@@ -1,19 +1,36 @@
-import type { FormEvent, ReactNode } from "react";
-import { Eye } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { ROUTE } from "@/app/routes/routes";
+import {
+  signInFormSchema,
+  signUpFormSchema,
+  type SignInFormValues,
+  type SignUpFormValues,
+} from "@/lib/validation/schemas";
+import { FieldError } from "@/shared/components/form/field-error";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 
-export type AuthCardProps = {
+type AuthCardBaseProps = {
   title: string;
   description: string;
   submitLabel: string;
   switchText: string;
   switchLabel: string;
-  switchRoute: string;
-  showNameField?: boolean;
-  footer?: ReactNode;
+  switchRoute: typeof ROUTE.SIGNIN | typeof ROUTE.SIGNUP;
+  submitError?: string;
 };
+
+export type AuthCardProps =
+  | (AuthCardBaseProps & {
+      showNameField?: false;
+      onSubmit: (values: SignInFormValues) => void;
+    })
+  | (AuthCardBaseProps & {
+      showNameField: true;
+      onSubmit: (values: SignUpFormValues) => void;
+    });
 
 export function AuthCard({
   title,
@@ -23,10 +40,17 @@ export function AuthCard({
   switchLabel,
   switchRoute,
   showNameField = false,
+  submitError,
+  onSubmit,
 }: AuthCardProps) {
-  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
-    event.preventDefault();
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignInFormValues | SignUpFormValues>({
+    resolver: zodResolver(showNameField ? signUpFormSchema : signInFormSchema),
+    defaultValues: showNameField ? { name: "", email: "", password: "" } : { email: "", password: "" },
+  });
 
   return (
     <div className="rounded-[15px] bg-[#101010] p-8 text-white shadow-2xl shadow-black/35">
@@ -38,7 +62,11 @@ export function AuthCard({
         </div>
       </div>
 
-      <form className="grid gap-2.5" onSubmit={handleSubmit}>
+      <form
+        className="grid gap-3"
+        noValidate
+        onSubmit={handleSubmit((values) => onSubmit(values as SignInFormValues & SignUpFormValues))}
+      >
         {showNameField ? (
           <div className="grid gap-1.5">
             <Label htmlFor="name" className="sr-only">
@@ -46,12 +74,12 @@ export function AuthCard({
             </Label>
             <Input
               id="name"
-              name="name"
               autoComplete="name"
               placeholder="Nome*"
               className="border-white/5 bg-white/7 text-white placeholder:text-white/34"
-              required
+              {...register("name" as const)}
             />
+            <FieldError message={"name" in errors ? errors.name?.message : undefined} />
           </div>
         ) : null}
 
@@ -61,32 +89,33 @@ export function AuthCard({
           </Label>
           <Input
             id="email"
-            name="email"
             type="email"
             autoComplete="email"
             placeholder="Email*"
             className="border-white/5 bg-white/7 text-white placeholder:text-white/34"
-            required
+            {...register("email")}
           />
+          <FieldError message={errors.email?.message} />
         </div>
 
-        <div className="relative grid gap-1.5">
+        <div className="grid gap-1.5">
           <Label htmlFor="password" className="sr-only">
             Senha
           </Label>
           <Input
             id="password"
-            name="password"
             type="password"
             autoComplete={showNameField ? "new-password" : "current-password"}
             placeholder="Senha*"
             className="border-white/5 bg-white pr-10 text-black placeholder:text-black/40"
-            required
+            {...register("password")}
           />
-          <Eye className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/22" />
+          <FieldError message={errors.password?.message} />
         </div>
 
-        <Button type="submit" size="lg" className="mt-3 w-full text-black">
+        <FieldError message={submitError} />
+
+        <Button type="submit" size="lg" className="mt-2 w-full text-black">
           {submitLabel}
         </Button>
       </form>

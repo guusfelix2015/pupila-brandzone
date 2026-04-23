@@ -1,7 +1,10 @@
 import { AuthCard } from "@/features/auth/components/auth-card";
+import { useSignInPageController } from "@/features/auth/hooks/use-sign-in-page-controller";
 import { AuthPageShell } from "@/features/auth/components/auth-page-shell";
 
 export function SignInPage() {
+  const signInPageController = useSignInPageController();
+
   return (
     <AuthPageShell
       eyebrow="Biblioteca visual"
@@ -14,7 +17,9 @@ export function SignInPage() {
         submitLabel="Entrar"
         switchText="Ainda não tem conta?"
         switchLabel="Criar conta"
-        switchRoute="signup"
+        switchRoute={signInPageController.switchRoute}
+        submitError={signInPageController.submitError}
+        onSubmit={signInPageController.handleSubmit}
       />
     </AuthPageShell>
   );
