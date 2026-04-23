@@ -111,7 +111,7 @@ export function ImagesPageView({ imagesPageController }: ImagesPageViewProps) {
           </DialogHeader>
           {imagesPageController.selectedImage ? (
             <div className="flex min-h-0 flex-1 flex-col gap-4 px-6 pb-6">
-              <div className="shrink-0">
+              <div className="shrink-0 rounded-[12px] bg-white/[0.03] p-3 ring-1 ring-black/30">
                 <CommentForm
                   key={imagesPageController.editingComment?.id ?? "new-comment"}
                   defaultContent={imagesPageController.editingComment?.content}

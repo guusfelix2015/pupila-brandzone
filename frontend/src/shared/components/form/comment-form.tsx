@@ -32,7 +32,7 @@ export function CommentForm({ defaultContent = "", submitLabel, onSubmit, onCanc
   const isEditing = Boolean(defaultContent);
 
   return (
-    <form className="grid gap-2" onSubmit={handleSubmit(handleValidSubmit)}>
+    <form className="grid gap-4" onSubmit={handleSubmit(handleValidSubmit)}>
       {isEditing ? (
         <div className="flex items-center gap-1.5 text-xs font-medium text-primary">
           <Pencil className="h-3 w-3" />
@@ -47,7 +47,7 @@ export function CommentForm({ defaultContent = "", submitLabel, onSubmit, onCanc
         {...register("content")}
       />
       <FieldError message={errors.content?.message} />
-      <div className="flex justify-end gap-2">
+      <div className="flex flex-wrap justify-end gap-2 pt-1">
         {onCancel ? (
           <Button type="button" variant="outline" size="sm" onClick={onCancel}>
             Cancelar
