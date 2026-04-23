@@ -66,7 +66,7 @@ export function GroupList({ groups, groupCounts, onEditGroup, onDeleteGroup }: G
 
               <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                 {counts.images > 0 && (
-                  <span className="inline-flex items-center gap-1 rounded-md bg-accent/60 px-2 py-0.5 text-accent-foreground">
+                  <span className="inline-flex items-center gap-1 rounded-md bg-accent/95 px-2 py-0.5 text-black">
                     <Image className="h-3 w-3" />
                     {counts.images} {counts.images === 1 ? "imagem" : "imagens"}
                   </span>

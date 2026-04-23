@@ -68,7 +68,7 @@ export function PaletteCard({
           ))}
         </div>
         <EntityBadges groupIds={palette.groupIds} tagIds={palette.tagIds} groups={groups} tags={tags} />
-        <Badge className="w-fit inline-flex items-center gap-1 border-muted bg-muted text-muted-foreground">
+        <Badge className="w-fit inline-flex items-center gap-1 border-white/15 bg-white/12 text-white/82">
           <MessageSquare className="h-3 w-3" />
           {palette.comments.length} {palette.comments.length === 1 ? "comentário" : "comentários"}
         </Badge>

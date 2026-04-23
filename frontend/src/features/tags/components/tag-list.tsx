@@ -78,13 +78,13 @@ export function TagList({ tags, tagCounts, onEditTag, onDeleteTag }: TagListProp
 
             <div className="flex flex-wrap items-center gap-2">
               {counts.images > 0 && (
-                <Badge className="inline-flex items-center gap-1 border-accent bg-accent/40 text-accent-foreground">
+                <Badge className="inline-flex items-center gap-1 border-accent/70 bg-accent/95 text-black">
                   <Image className="h-3 w-3" />
                   {counts.images}
                 </Badge>
               )}
               {counts.palettes > 0 && (
-                <Badge className="inline-flex items-center gap-1 border-secondary/60 bg-secondary/20 text-secondary-foreground">
+                <Badge className="inline-flex items-center gap-1 border-secondary/70 bg-secondary/90 text-black">
                   <Palette className="h-3 w-3" />
                   {counts.palettes}
                 </Badge>

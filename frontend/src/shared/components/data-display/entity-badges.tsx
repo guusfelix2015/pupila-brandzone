@@ -1,6 +1,11 @@
 import type { Group, ID, Tag } from "@/core/types/domain";
 import { Badge } from "@/shared/ui/badge";
 
+const entityBadgeClasses = {
+  group: "border-accent/70 bg-accent/95 text-black shadow-sm shadow-accent/10",
+  tag: "border-secondary/70 bg-secondary/90 text-black shadow-sm shadow-secondary/10",
+};
+
 export type EntityBadgesProps = {
   groupIds: ID[];
   tagIds: ID[];
@@ -38,11 +43,7 @@ export function EntityBadges({ groupIds, tagIds, groups, tags, limit = 6 }: Enti
       {visibleItems.map((item) => (
         <Badge
           key={item.id}
-          className={
-            item.type === "group"
-              ? "border-accent bg-accent/40 text-accent-foreground"
-              : "border-secondary/60 bg-secondary/20 text-secondary-foreground"
-          }
+          className={entityBadgeClasses[item.type]}
         >
           {item.type === "group" ? "Grupo:" : "Tag:"} {item.label}
         </Badge>
@@ -50,7 +51,7 @@ export function EntityBadges({ groupIds, tagIds, groups, tags, limit = 6 }: Enti
 
       {hiddenItems.length > 0 && (
         <div className="group relative inline-flex">
-          <Badge className="cursor-help border-muted bg-muted text-muted-foreground">+{hiddenItems.length}</Badge>
+          <Badge className="cursor-help border-white/20 bg-white/90 text-black">+{hiddenItems.length}</Badge>
 
           <div className="invisible absolute bottom-full left-1/2 z-50 mb-2 min-w-[180px] max-w-[260px] -translate-x-1/2 rounded-lg border bg-card p-3 opacity-0 shadow-lg transition-all duration-150 group-hover:visible group-hover:opacity-100">
             <div className="mb-1.5 text-xs font-semibold text-muted-foreground">Grupos e tags</div>
@@ -58,11 +59,7 @@ export function EntityBadges({ groupIds, tagIds, groups, tags, limit = 6 }: Enti
               {hiddenItems.map((item) => (
                 <Badge
                   key={item.id}
-                  className={
-                    item.type === "group"
-                      ? "border-accent bg-accent/40 text-accent-foreground"
-                      : "border-secondary/60 bg-secondary/20 text-secondary-foreground"
-                  }
+                  className={entityBadgeClasses[item.type]}
                 >
                   {item.type === "group" ? "G:" : "T:"} {item.label}
                 </Badge>

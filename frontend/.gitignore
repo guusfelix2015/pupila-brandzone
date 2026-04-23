@@ -68,3 +68,5 @@ logs/
 *.pid.lock
 
 .agents
+
+.DS_Store
