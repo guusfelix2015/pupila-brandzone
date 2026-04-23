@@ -76,7 +76,7 @@ export function AuthCard({
               id="name"
               autoComplete="name"
               placeholder="Nome*"
-              className="border-white/5 bg-white/7 text-white placeholder:text-white/34"
+              className="border-white/5 bg-white text-black placeholder:text-black/40"
               {...register("name" as const)}
             />
             <FieldError message={"name" in errors ? errors.name?.message : undefined} />
@@ -92,7 +92,7 @@ export function AuthCard({
             type="email"
             autoComplete="email"
             placeholder="Email*"
-            className="border-white/5 bg-white/7 text-white placeholder:text-white/34"
+            className="border-white/5 bg-white text-black placeholder:text-black/40"
             {...register("email")}
           />
           <FieldError message={errors.email?.message} />
