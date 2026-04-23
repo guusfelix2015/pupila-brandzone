@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { ROUTE } from "@/app/routes/routes";
 import {
   signInFormSchema,
@@ -122,9 +123,9 @@ export function AuthCard({
 
       <div className="mt-5 flex flex-wrap items-center justify-center gap-1 text-xs text-white/48">
         <span>{switchText}</span>
-        <a className="font-semibold text-primary hover:text-primary/85" href={`#/${switchRoute}`}>
+        <Link className="font-semibold text-primary hover:text-primary/85" to={`/${switchRoute}`}>
           {switchLabel}
-        </a>
+        </Link>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import type { SignInFormValues } from "@/lib/validation/schemas";
 import { ROUTE } from "@/app/routes/routes";
 import { useAuthStore } from "@/store/auth-store";
@@ -13,6 +14,7 @@ export type SignInPageController = {
 export function useSignInPageController(): SignInPageController {
   const signIn = useAuthStore((state) => state.signIn);
   const [submitError, setSubmitError] = useState<string | undefined>();
+  const navigate = useNavigate();
 
   function handleSubmit(values: SignInFormValues): void {
     const result = signIn(values);
@@ -29,6 +31,7 @@ export function useSignInPageController(): SignInPageController {
     toast.success("Login realizado.", {
       description: "Bem-vindo ao seu acervo visual.",
     });
+    navigate(`/${ROUTE.IMAGES}`);
   }
 
   return {

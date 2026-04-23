@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ImagesPage } from "@/pages/images/images-page";
 import { PalettesPage } from "@/pages/palettes/palettes-page";
 import { GroupsPage } from "@/pages/groups/groups-page";
 import { TagsPage } from "@/pages/tags/tags-page";
 import { SignInPage } from "@/pages/auth/sign-in-page";
 import { SignUpPage } from "@/pages/auth/sign-up-page";
+import { AppShell } from "@/shared/components/layout/app-shell";
+import { useAuthStore } from "@/store/auth-store";
 
 export const ROUTE = {
   IMAGES: "images",
@@ -38,59 +40,49 @@ export const routeDefinitions: RouteDefinition[] = [
   { id: ROUTE.TAGS, label: "Tags" },
 ];
 
-function parseRouteFromHash(): Route {
-  const hashRoute = window.location.hash.replace("#/", "");
-  if (validRoutes.includes(hashRoute as AppRoute) || validAuthRoutes.includes(hashRoute as AuthRoute)) {
-    return hashRoute as Route;
-  }
-
-  return ROUTE.IMAGES;
-}
-
 export function isAppRoute(route: Route): route is AppRoute {
   return validRoutes.includes(route as AppRoute);
 }
 
-export function useHashRoute(): [Route, (route: Route) => void] {
-  const [route, setRoute] = useState<Route>(() => parseRouteFromHash());
-
-  useEffect(() => {
-    function handleHashChange(): void {
-      setRoute(parseRouteFromHash());
-    }
-
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
-
-  function navigate(nextRoute: Route): void {
-    window.location.hash = `/${nextRoute}`;
-    setRoute(nextRoute);
-  }
-
-  return [route, navigate];
+export function isAuthRoute(route: Route): route is AuthRoute {
+  return validAuthRoutes.includes(route as AuthRoute);
 }
 
-export function AppRoutes({ route }: { route: Route }) {
-  if (route === ROUTE.SIGNIN) {
-    return <SignInPage />;
-  }
+export function ProtectedRoute() {
+  const currentUser = useAuthStore((state) => state.currentUser);
+  return currentUser ? <Outlet /> : <Navigate to={`/${ROUTE.SIGNIN}`} replace />;
+}
 
-  if (route === ROUTE.SIGNUP) {
-    return <SignUpPage />;
-  }
+export function PublicOnlyRoute() {
+  const currentUser = useAuthStore((state) => state.currentUser);
+  return !currentUser ? <Outlet /> : <Navigate to={`/${ROUTE.IMAGES}`} replace />;
+}
 
-  if (route === ROUTE.PALETTES) {
-    return <PalettesPage />;
-  }
+export function AppShellLayout() {
+  return (
+    <AppShell>
+      <Outlet />
+    </AppShell>
+  );
+}
 
-  if (route === ROUTE.GROUPS) {
-    return <GroupsPage />;
-  }
-
-  if (route === ROUTE.TAGS) {
-    return <TagsPage />;
-  }
-
-  return <ImagesPage />;
+export function AppRoutes() {
+  return (
+    <Routes>
+      <Route element={<PublicOnlyRoute />}>
+        <Route path={`/${ROUTE.SIGNIN}`} element={<SignInPage />} />
+        <Route path={`/${ROUTE.SIGNUP}`} element={<SignUpPage />} />
+      </Route>
+      <Route element={<ProtectedRoute />}>
+        <Route element={<AppShellLayout />}>
+          <Route path={`/${ROUTE.IMAGES}`} element={<ImagesPage />} />
+          <Route path={`/${ROUTE.PALETTES}`} element={<PalettesPage />} />
+          <Route path={`/${ROUTE.GROUPS}`} element={<GroupsPage />} />
+          <Route path={`/${ROUTE.TAGS}`} element={<TagsPage />} />
+        </Route>
+      </Route>
+      <Route path="/" element={<Navigate to={`/${ROUTE.IMAGES}`} replace />} />
+      <Route path="*" element={<Navigate to={`/${ROUTE.IMAGES}`} replace />} />
+    </Routes>
+  );
 }

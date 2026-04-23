@@ -1,6 +1,11 @@
 import { act, renderHook } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import { useSignInPageController } from "@/features/auth/hooks/use-sign-in-page-controller";
 import { useAuthStore } from "@/store/auth-store";
+
+function wrapper({ children }: { children: React.ReactNode }) {
+  return <MemoryRouter>{children}</MemoryRouter>;
+}
 
 describe("useSignInPageController", () => {
   beforeEach(() => {
@@ -9,7 +14,7 @@ describe("useSignInPageController", () => {
   });
 
   it("sets submit error for invalid credentials", () => {
-    const { result } = renderHook(() => useSignInPageController());
+    const { result } = renderHook(() => useSignInPageController(), { wrapper });
 
     act(() => {
       result.current.handleSubmit({ email: "teste@example.com", password: "123456" });
@@ -25,7 +30,7 @@ describe("useSignInPageController", () => {
       password: "123456",
     });
 
-    const { result } = renderHook(() => useSignInPageController());
+    const { result } = renderHook(() => useSignInPageController(), { wrapper });
 
     act(() => {
       result.current.handleSubmit({ email: "teste@example.com", password: "123456" });

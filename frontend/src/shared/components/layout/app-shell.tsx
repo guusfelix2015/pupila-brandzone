@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { AppRoute, Route } from "@/app/routes/routes";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { routeDefinitions, ROUTE } from "@/app/routes/routes";
 import { cn } from "@/lib/utils/cn";
 import { getInitialsFromContent } from "@/lib/utils/text";
@@ -10,14 +10,15 @@ import { useAuthStore } from "@/store/auth-store";
 import { toast } from "sonner";
 
 export type AppShellProps = {
-  currentRoute: AppRoute;
-  onNavigate: (route: Route) => void;
   children: ReactNode;
 };
 
-export function AppShell({ currentRoute, onNavigate, children }: AppShellProps) {
+export function AppShell({ children }: AppShellProps) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const currentUser = useAuthStore((state) => state.currentUser);
   const signOut = useAuthStore((state) => state.signOut);
+  const currentRoute = location.pathname.replace("/", "") || ROUTE.IMAGES;
 
   return (
     <div className="min-h-screen text-foreground">
@@ -34,19 +35,18 @@ export function AppShell({ currentRoute, onNavigate, children }: AppShellProps) 
           <div className="flex flex-wrap items-center gap-2">
             <nav className="flex flex-wrap gap-2" aria-label="Navegação principal">
               {routeDefinitions.map((route) => (
-                <button
+                <Link
                   key={route.id}
-                  type="button"
+                  to={`/${route.id}`}
                   className={cn(
                     "rounded-[10px] border px-3 py-2 text-xs font-medium uppercase tracking-[0.08em] transition-colors",
                     currentRoute === route.id
                       ? "border-primary bg-primary text-primary-foreground shadow-sm"
                       : "border-transparent text-foreground/72 hover:border-foreground/10 hover:bg-foreground/10 hover:text-foreground",
                   )}
-                  onClick={() => onNavigate(route.id)}
                 >
                   {route.label}
-                </button>
+                </Link>
               ))}
             </nav>
             {currentUser ? (
@@ -78,7 +78,7 @@ export function AppShell({ currentRoute, onNavigate, children }: AppShellProps) 
                       toast.success("Sessão encerrada.", {
                         description: "Você saiu do Brand Zone.",
                       });
-                      onNavigate(ROUTE.SIGNIN);
+                      navigate(`/${ROUTE.SIGNIN}`);
                     }}
                   >
                     Sair
@@ -86,7 +86,7 @@ export function AppShell({ currentRoute, onNavigate, children }: AppShellProps) 
                 </PopoverContent>
               </Popover>
             ) : (
-              <Button type="button" variant="outline" size="sm" onClick={() => onNavigate(ROUTE.SIGNIN)}>
+              <Button type="button" variant="outline" size="sm" onClick={() => navigate(`/${ROUTE.SIGNIN}`)}>
                 Entrar
               </Button>
             )}

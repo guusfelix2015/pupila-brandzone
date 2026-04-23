@@ -1,14 +1,19 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router-dom";
 import { ROUTE } from "@/app/routes/routes";
 import { AuthCard } from "@/features/auth/components/auth-card";
+
+function renderWithRouter(ui: React.ReactElement) {
+  return render(<MemoryRouter>{ui}</MemoryRouter>);
+}
 
 describe("AuthCard", () => {
   it("validates sign in fields", async () => {
     const user = userEvent.setup();
     const handleSubmit = jest.fn();
 
-    render(
+    renderWithRouter(
       <AuthCard
         title="Entrar"
         description="Descricao"
@@ -33,7 +38,7 @@ describe("AuthCard", () => {
     const user = userEvent.setup();
     const handleSubmit = jest.fn();
 
-    render(
+    renderWithRouter(
       <AuthCard
         title="Criar conta"
         description="Descricao"
@@ -59,7 +64,7 @@ describe("AuthCard", () => {
   });
 
   it("renders submit error when provided", () => {
-    render(
+    renderWithRouter(
       <AuthCard
         title="Entrar"
         description="Descricao"
