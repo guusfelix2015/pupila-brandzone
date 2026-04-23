@@ -22,7 +22,7 @@ export function ImagesPageView({ imagesPageController }: ImagesPageViewProps) {
       description="Cadastre referências visuais por URL e organize cada item com grupos, tags e comentários."
       action={<Button onClick={() => imagesPageController.setCreateDialogOpen(true)}>Nova imagem</Button>}
       stats={
-        <Badge className="inline-flex items-center gap-1.5 border-accent bg-accent/50 text-accent-foreground">
+        <Badge className="inline-flex items-center gap-1.5 border-transparent bg-accent/95 text-black shadow-sm shadow-accent/10">
           <Image className="h-3 w-3" />
           {imagesPageController.images.length} {imagesPageController.images.length === 1 ? "imagem" : "imagens"}
         </Badge>

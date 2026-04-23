@@ -19,7 +19,7 @@ export function GroupsPageView({ groupsPageController }: GroupsPageViewProps) {
       description="Gerencie grupos usados para organizar referencias visuais por projeto, campanha ou contexto."
       action={<Button onClick={groupsPageController.handleOpenCreateGroup}>Novo grupo</Button>}
       stats={
-        <Badge className="inline-flex items-center gap-1.5 border-accent bg-accent/50 text-accent-foreground">
+        <Badge className="inline-flex items-center gap-1.5 border-transparent bg-accent/95 text-black shadow-sm shadow-accent/10">
           <FolderOpen className="h-3 w-3" />
           {groupsPageController.groups.length} {groupsPageController.groups.length === 1 ? "grupo" : "grupos"}
         </Badge>

@@ -15,7 +15,7 @@ export function PageShell({ title, description, action, stats, children }: PageS
         <div className="grid gap-3">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Acervo do MVP</p>
           <h1 className="font-display text-6xl leading-[0.9] text-foreground sm:text-7xl">{title}</h1>
-          <p className="max-w-3xl text-sm leading-6 tracking-[0.03em] text-foreground/70">{description}</p>
+          <p className="max-w-3xl text-sm leading-6 tracking-[0.03em] text-foreground/82">{description}</p>
           {stats ? <div className="mt-1 flex flex-wrap items-center gap-2">{stats}</div> : null}
         </div>
         {action}

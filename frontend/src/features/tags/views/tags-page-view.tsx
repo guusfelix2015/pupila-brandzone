@@ -19,7 +19,7 @@ export function TagsPageView({ tagsPageController }: TagsPageViewProps) {
       description="Gerencie tags reutilizáveis para classificar imagens e paletas por tema, estilo ou uso."
       action={<Button onClick={tagsPageController.handleOpenCreateTag}>Nova tag</Button>}
       stats={
-        <Badge className="inline-flex items-center gap-1.5 border-secondary/60 bg-secondary/30 text-secondary-foreground">
+        <Badge className="inline-flex items-center gap-1.5 border-transparent bg-secondary/90 text-black shadow-sm shadow-secondary/10">
           <TagIcon className="h-3 w-3" />
           {tagsPageController.tags.length} {tagsPageController.tags.length === 1 ? "tag" : "tags"}
         </Badge>

@@ -47,7 +47,7 @@ export function ImageCard({ image, groups, tags, onOpenComments, onEditImage, on
       </CardHeader>
       <CardContent className="grid gap-3">
         <EntityBadges groupIds={image.groupIds} tagIds={image.tagIds} groups={groups} tags={tags} />
-        <Badge className="w-fit inline-flex items-center gap-1 border-white/15 bg-white/12 text-white/82">
+        <Badge className="w-fit inline-flex items-center gap-1 border-transparent bg-white/12 text-white/82 ring-1 ring-black/40">
           <MessageSquare className="h-3 w-3" />
           {image.comments.length} {image.comments.length === 1 ? "comentário" : "comentários"}
         </Badge>
