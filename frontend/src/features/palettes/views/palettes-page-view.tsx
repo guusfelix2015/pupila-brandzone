@@ -1,6 +1,10 @@
 import { PaletteForm } from "@/features/palettes/components/palette-form";
 import { PaletteGrid } from "@/features/palettes/components/palette-grid";
+import { PaletteDetailsList } from "@/features/palettes/components/palette-details-list";
+import { PaletteList } from "@/features/palettes/components/palette-list";
+import { PaletteViewModeControl } from "@/features/palettes/components/palette-view-mode-control";
 import type { PalettesPageController } from "@/features/palettes/hooks/use-palettes-page-controller";
+import { PALETTE_VIEW_MODE } from "@/features/palettes/types/palette-view-mode";
 import { CommentsList } from "@/shared/components/data-display/comments-list";
 import { DeleteConfirmationDialog } from "@/shared/components/feedback/delete-confirmation-dialog";
 import { CommentForm } from "@/shared/components/form/comment-form";
@@ -37,15 +41,43 @@ export function PalettesPageView({ palettesPageController }: PalettesPageViewPro
         onTagChange={palettesPageController.handleTagFilterChange}
         onClearFilters={palettesPageController.handleClearFilters}
       />
-      <PaletteGrid
-        palettes={palettesPageController.palettes}
-        hasFilters={palettesPageController.hasFilters}
-        groups={palettesPageController.groups}
-        tags={palettesPageController.tags}
-        onOpenComments={palettesPageController.handleOpenComments}
-        onEditPalette={palettesPageController.handleOpenEditPalette}
-        onDeletePalette={palettesPageController.handleRequestDeletePalette}
+      <PaletteViewModeControl
+        value={palettesPageController.viewMode}
+        onChange={palettesPageController.handleViewModeChange}
       />
+      {palettesPageController.viewMode === PALETTE_VIEW_MODE.GRID ? (
+        <PaletteGrid
+          palettes={palettesPageController.palettes}
+          hasFilters={palettesPageController.hasFilters}
+          groups={palettesPageController.groups}
+          tags={palettesPageController.tags}
+          onOpenComments={palettesPageController.handleOpenComments}
+          onEditPalette={palettesPageController.handleOpenEditPalette}
+          onDeletePalette={palettesPageController.handleRequestDeletePalette}
+        />
+      ) : null}
+      {palettesPageController.viewMode === PALETTE_VIEW_MODE.LIST ? (
+        <PaletteList
+          palettes={palettesPageController.palettes}
+          hasFilters={palettesPageController.hasFilters}
+          groups={palettesPageController.groups}
+          tags={palettesPageController.tags}
+          onOpenComments={palettesPageController.handleOpenComments}
+          onEditPalette={palettesPageController.handleOpenEditPalette}
+          onDeletePalette={palettesPageController.handleRequestDeletePalette}
+        />
+      ) : null}
+      {palettesPageController.viewMode === PALETTE_VIEW_MODE.DETAILS ? (
+        <PaletteDetailsList
+          palettes={palettesPageController.palettes}
+          hasFilters={palettesPageController.hasFilters}
+          groups={palettesPageController.groups}
+          tags={palettesPageController.tags}
+          onOpenComments={palettesPageController.handleOpenComments}
+          onEditPalette={palettesPageController.handleOpenEditPalette}
+          onDeletePalette={palettesPageController.handleRequestDeletePalette}
+        />
+      ) : null}
 
       <Dialog
         open={palettesPageController.isCreateDialogOpen}
@@ -114,7 +146,7 @@ export function PalettesPageView({ palettesPageController }: PalettesPageViewPro
           </DialogHeader>
           {palettesPageController.selectedPalette ? (
             <div className="flex min-h-0 flex-1 flex-col gap-4 px-6 pb-6">
-              <div className="shrink-0">
+              <div className="shrink-0 rounded-[12px] bg-white/[0.03] p-3 ring-1 ring-black/30">
                 <CommentForm
                   key={palettesPageController.editingComment?.id ?? "new-comment"}
                   defaultContent={palettesPageController.editingComment?.content}

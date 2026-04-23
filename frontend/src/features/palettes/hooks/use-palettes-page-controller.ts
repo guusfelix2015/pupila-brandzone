@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import type { Comment, PaletteItem } from "@/core/types/domain";
+import { PALETTE_VIEW_MODE, type PaletteViewMode } from "@/features/palettes/types/palette-view-mode";
 import type { CommentFormValues, PaletteFormValues } from "@/lib/validation/schemas";
 import { filterItemsByGroupAndTag } from "@/lib/filters/filter-items";
 import { searchItemsByQuery } from "@/lib/search/search-items";
@@ -17,7 +18,9 @@ export type PalettesPageController = {
   deletingPalette?: PaletteItem;
   editingComment?: Comment;
   hasFilters: boolean;
+  viewMode: PaletteViewMode;
   setCreateDialogOpen: (open: boolean) => void;
+  handleViewModeChange: (viewMode: PaletteViewMode) => void;
   handleCreatePalette: (values: PaletteFormValues) => void;
   handleOpenEditPalette: (palette: PaletteItem) => void;
   handleCloseEditPalette: () => void;
@@ -55,6 +58,7 @@ export function usePalettesPageController(): PalettesPageController {
   const [selectedPaletteId, setSelectedPaletteId] = useState<string | undefined>();
   const [deletingPaletteId, setDeletingPaletteId] = useState<string | undefined>();
   const [editingComment, setEditingComment] = useState<Comment | undefined>();
+  const [viewMode, setViewMode] = useState<PaletteViewMode>(PALETTE_VIEW_MODE.GRID);
 
   const palettes = useMemo(() => {
     const searchedPalettes = searchItemsByQuery(allPalettes, tags, filters.query);
@@ -125,7 +129,9 @@ export function usePalettesPageController(): PalettesPageController {
     deletingPalette,
     editingComment,
     hasFilters,
+    viewMode,
     setCreateDialogOpen,
+    handleViewModeChange: setViewMode,
     handleCreatePalette,
     handleOpenEditPalette: (palette) => setEditingPaletteId(palette.id),
     handleCloseEditPalette: () => setEditingPaletteId(undefined),

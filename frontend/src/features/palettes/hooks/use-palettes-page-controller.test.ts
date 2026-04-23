@@ -1,5 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import { usePalettesPageController } from "@/features/palettes/hooks/use-palettes-page-controller";
+import { PALETTE_VIEW_MODE } from "@/features/palettes/types/palette-view-mode";
 import { useAppStore } from "@/store/app-store";
 
 describe("usePalettesPageController", () => {
@@ -28,6 +29,24 @@ describe("usePalettesPageController", () => {
     expect(result.current.palettes[0].title).toBe("Paleta institucional");
     expect(result.current.palettes[0].colors.map((color) => color.hex)).toEqual(["#FFFFFF", "#123ABC"]);
     expect(result.current.isCreateDialogOpen).toBe(false);
+  });
+
+  it("starts in grid mode and changes palette view mode", () => {
+    const { result } = renderHook(() => usePalettesPageController());
+
+    expect(result.current.viewMode).toBe(PALETTE_VIEW_MODE.GRID);
+
+    act(() => {
+      result.current.handleViewModeChange(PALETTE_VIEW_MODE.LIST);
+    });
+
+    expect(result.current.viewMode).toBe(PALETTE_VIEW_MODE.LIST);
+
+    act(() => {
+      result.current.handleViewModeChange(PALETTE_VIEW_MODE.DETAILS);
+    });
+
+    expect(result.current.viewMode).toBe(PALETTE_VIEW_MODE.DETAILS);
   });
 
   it("filters palettes by query, group and tag", () => {
