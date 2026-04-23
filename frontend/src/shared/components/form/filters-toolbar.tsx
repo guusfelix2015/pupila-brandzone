@@ -25,7 +25,7 @@ export function FiltersToolbar({
   const hasActiveFilters = Boolean(filters.query || filters.groupId || filters.tagId);
 
   return (
-    <div className="grid gap-3 rounded-lg border bg-card/95 p-4 shadow-sm md:grid-cols-[1fr_220px_220px_auto]">
+    <div className="grid gap-3 rounded-[15px] border border-foreground/10 bg-foreground/10 p-4 shadow-sm backdrop-blur md:grid-cols-[1fr_220px_220px_auto]">
       <Input
         aria-label="Pesquisar"
         placeholder="Pesquisar por nome, comentário ou tag"

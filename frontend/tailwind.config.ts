@@ -41,6 +41,10 @@ const config: Config = {
         md: "6px",
         sm: "4px",
       },
+      fontFamily: {
+        sans: ["Manrope", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Anton", "Manrope", "sans-serif"],
+      },
     },
   },
   plugins: [],
