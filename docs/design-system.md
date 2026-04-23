@@ -1,6 +1,6 @@
 # Design de Sistema
 
-Documento de alto nível do Pupila Brand Zone, MVP frontend para gerenciamento local de referências visuais.
+Documento de alto nível do Pupila Brand Zone, frontend para gerenciamento local de referências visuais com fluxo de autenticação visual preparado para integração futura.
 
 ## 1. Arquitetura Geral
 
@@ -40,10 +40,10 @@ sequenceDiagram
 
 O estado foi dividido em duas camadas:
 
-| Camada        | Conteúdo                                                     | Tecnologia                 |
-| ------------- | ------------------------------------------------------------ | -------------------------- |
-| Global        | `images`, `palettes`, `groups`, `tags`, `filters`            | Zustand                    |
-| Local de tela | dialogs, item em edição, item selecionado, exclusão pendente | `useState` nos controllers |
+| Camada        | Conteúdo                                                                 | Tecnologia                 |
+| ------------- | ------------------------------------------------------------------------ | -------------------------- |
+| Global        | `images`, `palettes`, `groups`, `tags`, `filters`                        | Zustand                    |
+| Local de tela | dialogs, item em edição, item selecionado, exclusão pendente, `viewMode` | `useState` nos controllers |
 
 Princípios:
 
@@ -61,12 +61,16 @@ Princípios:
 | `Page`                      | ponto de entrada da rota/tela                     |
 | `Controller`                | orquestra estado, handlers e integração com store |
 | `View`                      | composição visual principal da tela               |
-| `ImageGrid` / `PaletteGrid` | listagem dos itens                                |
+| `ImageGrid` / `PaletteGrid` | listagem principal dos itens                      |
+| `PaletteList`               | visualização compacta de paletas                  |
+| `PaletteDetailsList`        | visualização expandida de paletas                 |
+| `PaletteViewModeControl`    | alternância entre modos de visualização           |
 | `ImageForm` / `PaletteForm` | criação e edição                                  |
 | `GroupList` / `TagList`     | gerenciamento de taxonomias                       |
 | `FiltersToolbar`            | busca textual e filtros                           |
 | `CommentsList`              | exibição e edição de comentários                  |
 | `DeleteConfirmationDialog`  | confirmação de exclusão                           |
+| `AuthPageShell` / `AuthCard`| composição visual de login e cadastro             |
 
 ### 2.2 Responsabilidades de cada componente
 
@@ -74,7 +78,7 @@ Princípios:
 
 - renderiza o layout global;
 - controla navegação entre módulos;
-- expõe ações globais de interface, como troca de tema.
+- expõe ações globais de navegação.
 
 #### `Page`
 
@@ -98,6 +102,7 @@ Princípios:
 
 - formulários coletam entrada e submetem dados validados;
 - grids e listas exibem entidades;
+- a feature de paletas suporta múltiplos modos (`grid`, `list`, `details`) sem alterar o estado persistido;
 - dialogs encapsulam fluxos de criação, edição e exclusão;
 - barra de filtros concentra busca e seleção por grupo/tag.
 
@@ -187,6 +192,7 @@ Implementação:
 - regras puras em `lib`;
 - composição final via `useMemo` nos controllers;
 - sem duplicar resultado filtrado no store.
+- o modo de visualização de paletas é tratado como estado de interface e não é persistido.
 
 ## 4. Decisões Técnicas
 
@@ -249,13 +255,14 @@ Desempenho:
 Usabilidade:
 
 - navegação simples entre módulos;
+- telas de login e cadastro seguem a identidade visual do produto e antecipam a futura integração com backend;
 - formulários com validação clara;
 - confirmação antes de exclusões com modal dedicado;
 - estados vazios informativos;
 - contadores por página para reforçar visibilidade de estado;
 - overflow controlado em grupos e tags com `+N`;
 - exibição complementar do conteúdo excedente em hover;
-- suporte a tema claro e escuro;
+- visualização avançada de paletas em grade, lista e detalhes para atender leitura densa e inspeção visual;
 - contraste e foco visual preservados;
 - interface estável em desktop e mobile.
 
@@ -265,7 +272,8 @@ Detalhes de interface considerados intencionalmente:
 - **Modal de confirmação de deleção**: ações destrutivas passam por confirmação explícita;
 - **Contadores por página**: imagens, paletas, grupos e tags exibem quantidade total no cabeçalho;
 - **Cards com overflow controlado**: quando há muitos grupos ou tags, a interface resume o excesso em `+N` e revela o restante em hover;
-- **Tema dark/light**: a aplicação permite alternância de tema com persistência da escolha;
+- **Visualização de paletas**: o usuário pode alternar entre leitura em grade, lista compacta e detalhes sem sair da tela;
+- **Autenticação visual**: login e cadastro existem como preparação de fluxo e composição visual, sem backend funcional neste momento;
 - **Consistência visual**: grids, listas, badges, dialogs e formulários seguem padrão previsível entre os módulos.
 
 ## Fechamento

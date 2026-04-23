@@ -1,6 +1,6 @@
 # Pupila Brand Zone
 
-MVP frontend para gerenciamento local de referências visuais da Pupila Brand Studio.
+Frontend do Pupila Brand Zone, uma biblioteca visual local para organizar referências de imagens, paletas, grupos, tags e comentários com identidade visual inspirada no ecossistema da Pupila.
 
 ## Stack
 
@@ -16,24 +16,26 @@ MVP frontend para gerenciamento local de referências visuais da Pupila Brand St
 - React Testing Library
 - `localStorage`
 
-## Escopo do MVP
+## Escopo do frontend
 
 O MVP implementa:
 
 - cadastro e listagem de imagens por URL;
 - cadastro e listagem de paletas de cores;
+- modos de visualização de paletas em grade, lista e detalhes;
 - grupos;
 - tags;
 - comentários em imagens e paletas;
 - busca por título, comentário e tag;
 - filtros por grupo e tag;
+- telas de login e cadastro preparadas para integração futura com backend;
 - persistência local com `localStorage`;
 - testes unitários das camadas principais.
 
 Fora do escopo atual:
 
 - backend real;
-- autenticação;
+- autenticação funcional;
 - exportação/importação;
 - recursos de IA;
 - dashboard de estatísticas;
@@ -45,6 +47,7 @@ Fora do escopo atual:
 Instalar dependências:
 
 ```bash
+cd frontend
 npm install
 ```
 
@@ -115,36 +118,41 @@ npm run format && npm run lint && npm run typecheck && npm run build && npm run 
 ## Estrutura
 
 ```txt
-src/
-  app/
-    providers/
-    routes/
-  pages/
-    images/
-    palettes/
-    groups/
-    tags/
-  core/
-    constants/
-    types/
-  features/
-    images/
-    palettes/
-    groups/
-    tags/
-  shared/
-    components/
-    ui/
-  store/
-  lib/
-    factories/
-    filters/
-    search/
-    storage/
-    utils/
-    validation/
-  styles/
-  test/
+pupila-brandzone/
+  docs/
+  frontend/
+    src/
+      app/
+        providers/
+        routes/
+      pages/
+        auth/
+        images/
+        palettes/
+        groups/
+        tags/
+      core/
+        constants/
+        types/
+      features/
+        auth/
+        images/
+        palettes/
+        groups/
+        tags/
+      shared/
+        components/
+        ui/
+      store/
+      lib/
+        factories/
+        filters/
+        search/
+        storage/
+        utils/
+        validation/
+      styles/
+      test/
 ```
 
 ## Arquitetura
@@ -165,6 +173,7 @@ Regras aplicadas:
 - controllers ficam em `features/<module>/hooks`;
 - views ficam em `features/<module>/views`;
 - componentes específicos ficam em `features/<module>/components`;
+- autenticação visual segue o mesmo princípio de composição por feature;
 - estado global fica em Zustand;
 - acesso ao `localStorage` fica isolado em `src/lib/storage`;
 - regras puras ficam em `src/lib`;
@@ -177,6 +186,7 @@ Regras aplicadas:
 - React Hook Form + Zod separam formulário e validação.
 - Busca e filtros rodam em memória por ser um MVP local.
 - `localStorage` foi escolhido por simplicidade e por não haver backend.
+- modos de visualização de paletas usam apenas estado transitório no controller, sem persistência;
 - Testes foram separados por camada: `lib`, store, hooks/controllers e componentes.
 
 ## Testes cobertos
@@ -188,6 +198,7 @@ Regras aplicadas:
 - persistência local;
 - actions da store;
 - controllers de grupos, tags, imagens e paletas;
+- alternância de visualização da feature de paletas;
 - formularios;
 - listas/grids;
 - toolbar de busca e filtros.
@@ -197,8 +208,7 @@ Regras aplicadas:
 - Dados ficam apenas no navegador atual.
 - Imagens são referenciadas por URL; arquivos binários não são armazenados.
 - Sem sincronização entre dispositivos.
-- Sem autenticação.
-- Sem backend real.
+- Sem backend real e sem autenticação funcional.
 - Testes end-to-end não foram implementados.
 
 ## Possíveis melhorias
