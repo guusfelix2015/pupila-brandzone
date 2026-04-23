@@ -40,6 +40,13 @@ export const paletteFormSchema = z.object({
     .refine(
       (value) => parseHexColors(value).length <= MAX_PALETTE_COLORS,
       `Limite de ${MAX_PALETTE_COLORS} cores por paleta.`,
+    )
+    .refine(
+      (value) => {
+        const colors = parseHexColors(value);
+        return new Set(colors).size === colors.length;
+      },
+      "Não é permitido cores HEX repetidas.",
     ),
   groupIds: z.array(z.string()),
   tagIds: z.array(z.string()),

@@ -57,6 +57,35 @@ describe("form schemas", () => {
     ).toBe(false);
   });
 
+  it("validates palette without duplicate HEX colors", () => {
+    expect(
+      paletteFormSchema.safeParse({
+        title: "Paleta",
+        colorsText: "#FFFFFF, #123ABC",
+        groupIds: [],
+        tagIds: [],
+      }).success,
+    ).toBe(true);
+
+    expect(
+      paletteFormSchema.safeParse({
+        title: "Paleta",
+        colorsText: "#FFFFFF, #FFFFFF",
+        groupIds: [],
+        tagIds: [],
+      }).success,
+    ).toBe(false);
+
+    expect(
+      paletteFormSchema.safeParse({
+        title: "Paleta",
+        colorsText: "#FFFFFF, #ffffff",
+        groupIds: [],
+        tagIds: [],
+      }).success,
+    ).toBe(false);
+  });
+
   it("validates palette color limit of 10", () => {
     const tenColors = Array.from({ length: 10 }, (_, i) => `#${i.toString(16).padStart(5, "0")}F`).join(", ");
     const elevenColors = Array.from({ length: 11 }, (_, i) => `#${i.toString(16).padStart(5, "0")}F`).join(", ");
